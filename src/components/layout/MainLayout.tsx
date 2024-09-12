@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { Outlet } from "react-router-dom";
+import Navbar from "../shared/Navbar";
 
 const MainLayout = () => {
   // Alert before reloading page
@@ -19,6 +20,7 @@ const MainLayout = () => {
   }, []);
   return (
     <div>
+      <Navbar />
       <Outlet />
     </div>
   );
