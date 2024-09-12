@@ -25,7 +25,7 @@ const Navbar = () => {
   };
 
   return (
-    <header className="flex h-20 w-full shrink-0 justify-between items-center px-4 md:px-6 shadow-sm sticky z-50">
+    <header className="flex h-16 md:h-20 w-full shrink-0 justify-between items-center px-4 md:px-6 shadow-sm sticky z-50">
       {/* sidebar for small screen */}
       <Sheet>
         <SheetTrigger asChild>
@@ -41,7 +41,7 @@ const Navbar = () => {
         </SheetTrigger>
         <SheetContent side="left">
           <Link to="/" className="flex items-center gap-2 group">
-            <h1 className="text-2xl font-extrabold">
+            <h1 className="text-xl font-extrabold">
               <span className="text-primary">Game</span>Space
             </h1>
           </Link>
@@ -149,7 +149,10 @@ const Navbar = () => {
       {/* Right side menu items */}
       <div className="flex items-center gap-1">
         <Link to={"/login"}>
-          <Button variant={"ghost"} className="text-base relative flex items-center gap-2">
+          <Button
+            variant={"ghost"}
+            className="text-base relative flex items-center gap-2"
+          >
             Login
           </Button>
         </Link>
