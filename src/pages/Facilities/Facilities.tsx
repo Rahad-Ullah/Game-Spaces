@@ -6,7 +6,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Search } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Label } from "@/components/ui/label";
 import { searchFacilities } from "@/utils/searchFacilities";
 

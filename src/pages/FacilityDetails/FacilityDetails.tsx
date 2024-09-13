@@ -42,7 +42,7 @@ const FacilityDetails = () => {
               <span className="font-bold">Description:</span>{" "}
               {facility?.description}
             </p>
-            <Link to={"/booking"}>
+            <Link to={`/booking/${id}`}>
               <Button className="md:text-base mt-6 flex items-center gap-1">
                 <BookmarkPlus size={20} /> Book Now
               </Button>

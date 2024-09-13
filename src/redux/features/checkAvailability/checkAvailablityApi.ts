@@ -2,10 +2,10 @@ import { baseApi } from "../../api/baseApi";
 
 const bookingApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    checkAvailability: builder.mutation({
-      query: (date) => {
+    checkAvailability: builder.query({
+      query: ({ date, id }) => {
         return {
-          url: `/check-availability?date=${date}`,
+          url: `/check-availability?date=${date}&facility=${id}`,
           method: "GET",
         };
       },
@@ -13,4 +13,4 @@ const bookingApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useCheckAvailabilityMutation } = bookingApi;
+export const { useCheckAvailabilityQuery } = bookingApi;

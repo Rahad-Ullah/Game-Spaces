@@ -1,4 +1,5 @@
 import MainLayout from "@/components/layout/MainLayout";
+import Booking from "@/pages/Booking/Booking";
 import ErrorPage from "@/pages/Error/ErrorPage";
 import Facilities from "@/pages/Facilities/Facilities";
 import FacilityDetails from "@/pages/FacilityDetails/FacilityDetails";
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
       {
         path: "/facilities/:id",
         element: <FacilityDetails />,
+      },
+      {
+        path: "/booking/:id",
+        element: <Booking />,
       },
       {
         path: "/sign-up",
