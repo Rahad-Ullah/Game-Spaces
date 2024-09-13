@@ -8,7 +8,7 @@ type TUser = {
 };
 
 export type TAuth = {
-  accessToken: string;
-  refreshToken?: string;
-  user: TUser;
+  accessToken: string | null;
+  refreshToken?: string | null;
+  user: TUser | null;
 };

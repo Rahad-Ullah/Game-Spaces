@@ -18,11 +18,7 @@ import { Link } from "react-router-dom";
 import { toast } from "sonner";
 import { useLoginMutation } from "@/redux/features/auth/authApi";
 import { useAppDispatch } from "@/redux/hook";
-import {
-  saveToAuth,
-  selectAuth,
-} from "@/redux/features/auth/AuthSlice";
-import { useSelector } from "react-redux";
+import { saveToAuth } from "@/redux/features/auth/AuthSlice";
 
 // form validation shema
 const formValidationSchema = z.object({
@@ -37,8 +33,6 @@ const formValidationSchema = z.object({
 const Login = () => {
   const [login] = useLoginMutation();
   const dispatch = useAppDispatch();
-  const auth = useSelector(selectAuth);
-  console.log(auth);
 
   // define form
   const form = useForm<z.infer<typeof formValidationSchema>>({

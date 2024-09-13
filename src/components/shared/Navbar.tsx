@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { Sheet, SheetContent, SheetTrigger } from "../ui/sheet";
 import { Button } from "../ui/button";
-import { MenuIcon } from "lucide-react";
+import { MenuIcon, User } from "lucide-react";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -12,8 +12,23 @@ import {
   NavigationMenuTrigger,
 } from "../ui/navigation-menu";
 import { HashLink } from "react-router-hash-link";
+import { useSelector } from "react-redux";
+import { logOut, selectAuth } from "@/redux/features/auth/AuthSlice";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "../ui/dropdown-menu";
+import { useAppDispatch } from "@/redux/hook";
 
 const Navbar = () => {
+  const user = useSelector(selectAuth);
+  const dispatch = useAppDispatch();
+  console.log(user);
+
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const toggleSidebar = () => {
@@ -146,22 +161,51 @@ const Navbar = () => {
           </NavigationMenuLink>
         </NavigationMenuList>
       </NavigationMenu>
+
       {/* Right side menu items */}
-      <div className="flex items-center gap-1">
-        <Link to={"/login"}>
-          <Button
-            variant={"ghost"}
-            className="text-base relative flex items-center gap-2"
-          >
-            Login
-          </Button>
-        </Link>
-        <Link to={"/sign-up"}>
-          <Button className="text-base relative flex items-center gap-2">
-            Sign up
-          </Button>
-        </Link>
-      </div>
+      {user.accessToken ? (
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button
+              variant="outline"
+              className="overflow-hidden rounded-full size-10 p-2"
+            >
+              <User size={24} className="overflow-hidden rounded-full" />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            <DropdownMenuLabel>
+              <p>{user?.user?.name}</p>
+              <p className="font-normal text-xs text-zinc-600">{user?.user?.email}</p>
+            </DropdownMenuLabel>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem>
+              <Link to={"/dashboard"}>Dashboard</Link>
+            </DropdownMenuItem>
+            <DropdownMenuItem>Settings</DropdownMenuItem>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem onClick={() => dispatch(logOut())}>
+              Logout
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      ) : (
+        <div className="flex items-center gap-1">
+          <Link to={"/login"}>
+            <Button
+              variant={"ghost"}
+              className="text-base relative flex items-center gap-2"
+            >
+              Login
+            </Button>
+          </Link>
+          <Link to={"/sign-up"}>
+            <Button className="text-base relative flex items-center gap-2">
+              Sign up
+            </Button>
+          </Link>
+        </div>
+      )}
     </header>
   );
 };
