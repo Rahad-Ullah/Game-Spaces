@@ -16,19 +16,10 @@ import { z } from "zod";
 import Container from "@/components/shared/Container";
 import { Link } from "react-router-dom";
 import { toast } from "sonner";
-import { useSignUpMutation } from "@/redux/features/auth/authApi";
+import { useLoginMutation } from "@/redux/features/auth/authApi";
 
 // form validation shema
 const formValidationSchema = z.object({
-  name: z.string().min(3, {
-    message: "Name must be at least 3 characters.",
-  }),
-  phone: z.string().length(11, {
-    message: "Phone number must be at least 11 digit.",
-  }),
-  address: z.string().min(5, {
-    message: "Address must be at least 5 characters.",
-  }),
   email: z.string().email().min(1, {
     message: "Email must be a valid email address.",
   }),
@@ -37,107 +28,55 @@ const formValidationSchema = z.object({
   }),
 });
 
-const SignUp = () => {
-  const [signUp] = useSignUpMutation();
+const Login = () => {
+  const [login] = useLoginMutation();
 
   // define form
   const form = useForm<z.infer<typeof formValidationSchema>>({
     resolver: zodResolver(formValidationSchema),
     defaultValues: {
-      name: "",
-      phone: "",
-      address: "",
       email: "",
       password: "",
     },
   });
 
-  // submit sign up handler
+  // submit login handler
   async function handleSignUp(values: z.infer<typeof formValidationSchema>) {
-    toast.loading("Account creating...", { id: "sign-up" });
+    toast.loading("Loging in...", { id: "login" });
 
     // user data for sending to server
-    const userData = {
-      name: values?.name,
-      phone: values?.phone,
-      address: values?.address,
+    const loginData = {
       email: values?.email,
       password: values?.password,
-      role: "user",
     };
 
     try {
-      const res = await signUp(userData).unwrap();
+      const res = await login(loginData).unwrap();
       if (res.success) {
-        toast.success("Sign up successful", { id: "sign-up" });
-        form.reset();
+        toast.success("Login successful", { id: "login" });
+        // form.reset();
+        console.log(res);
       }
     } catch (error: any) {
-      toast.error(error?.data?.message, { id: "sign-up" });
+      toast.error(error?.data?.message, { id: "login" });
       console.log(error);
     }
   }
 
   return (
-    <div className="py-12 bg-[url('https://png.pngtree.com/thumb_back/fw800/background/20230901/pngtree-a-group-of-sports-equipment-on-a-surface-image_13169788.jpg')] bg-fixed">
+    <div className=" py-14 bg-[url('https://png.pngtree.com/thumb_back/fw800/background/20230901/pngtree-a-group-of-sports-equipment-on-a-surface-image_13169788.jpg')] bg-fixed">
       <Container>
         <div className="flex w-full justify-center lg:justify-end items-center gap-10">
-          {/* Sign Up form */}
+          {/* Login form */}
           <div className="border rounded-2xl bg-white p-4 md:p-8 w-full md:w-1/2 lg:w-2/5">
             <CardTitle className="mb-8 font-bold text-2xl md:text-3xl text-center">
-              Sign Up
+              Login
             </CardTitle>
             <Form {...form}>
               <form
                 onSubmit={form.handleSubmit(handleSignUp)}
                 className="space-y-4 px-1"
               >
-                <FormField
-                  control={form.control}
-                  name="name"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Name</FormLabel>
-                      <FormControl>
-                        <Input placeholder="Your name" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-
-                <FormField
-                  control={form.control}
-                  name="phone"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Phone</FormLabel>
-                      <FormControl>
-                        <Input
-                          placeholder="Your phone"
-                          {...field}
-                          type="number"
-                        />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-
-                <FormField
-                  control={form.control}
-                  name="address"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>Address</FormLabel>
-                      <FormControl>
-                        <Input placeholder="Your address" {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-
                 <FormField
                   control={form.control}
                   name="email"
@@ -170,19 +109,22 @@ const SignUp = () => {
                         />
                       </FormControl>
                       <FormMessage />
+                      <Link to={""} className="hover:underline">
+                        <small>Forgot password?</small>
+                      </Link>
                     </FormItem>
                   )}
                 />
 
-                <Button className="w-full md:text-base py-5">Sign Up</Button>
+                <Button className="w-full md:text-base py-5">Login</Button>
 
                 <p className="text-sm text-center pt-4">
-                  Already have an account?{" "}
+                  New to GameSpace?{" "}
                   <Link
-                    to={"/login"}
+                    to={"/sign-up"}
                     className="font-bold text-primary hover:underline"
                   >
-                    Login
+                    Sign up
                   </Link>
                 </p>
               </form>
@@ -194,4 +136,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default Login;
