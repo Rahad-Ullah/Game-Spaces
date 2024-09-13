@@ -28,6 +28,12 @@ const facilityApi = baseApi.injectEndpoints({
         };
       },
     }),
+    getSingleFacility: builder.query({
+      query: (id) => ({
+        url: `/facility/${id}`,
+        method: "GET",
+      }),
+    }),
     getAllFacilities: builder.query({
       query: () => ({
         url: `/facility`,
@@ -41,5 +47,6 @@ export const {
   useCreateFacilityMutation,
   useUpdateFacilityMutation,
   useDeleteFacilityMutation,
+  useGetSingleFacilityQuery,
   useGetAllFacilitiesQuery,
 } = facilityApi;
