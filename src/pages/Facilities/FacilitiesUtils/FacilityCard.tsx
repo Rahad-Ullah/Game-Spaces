@@ -23,7 +23,7 @@ const FacilityCard = ({ facility }: { facility: TFacility }) => {
         <CardTitle className="text-xl">{name}</CardTitle>
       </CardHeader>
       <CardContent>
-        <p className="text-xl font-bold">${pricePerHour}</p>
+        <p className="text-xl font-bold">${pricePerHour} <span className="text-sm">/ Hour</span></p>
       </CardContent>
       <CardFooter>
         <Link to={`/facilities/${_id}`} className="w-full">

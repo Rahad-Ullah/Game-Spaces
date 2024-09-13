@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { useGetSingleFacilityQuery } from "@/redux/features/facility/facilityApi";
 import { TFacility } from "@/types/TFacility";
-import { BookmarkPlus, Loader2 } from "lucide-react";
+import { BookmarkPlus, Loader2, MapPin } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 
@@ -31,10 +31,14 @@ const FacilityDetails = () => {
             <h1 className="text-2xl md:text-3xl font-bold mb-2">
               {facility?.name}
             </h1>
+            <h1 className="font-medium mb-2 flex items-center gap-2">
+              <MapPin size={20} /> {facility?.location}
+            </h1>
             <h2 className="text-2xl md:text-3xl font-bold py-6">
-              $ {facility?.pricePerHour}
+              $ {facility?.pricePerHour}{" "}
+              <span className="text-base">/ Hour</span>
             </h2>
-            <p className="md:text-lg mt-6">
+            <p className="md:text-lg">
               <span className="font-bold">Description:</span>{" "}
               {facility?.description}
             </p>
