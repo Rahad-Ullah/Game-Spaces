@@ -17,6 +17,12 @@ import Container from "@/components/shared/Container";
 import { Link } from "react-router-dom";
 import { toast } from "sonner";
 import { useLoginMutation } from "@/redux/features/auth/authApi";
+import { useAppDispatch } from "@/redux/hook";
+import {
+  saveToAuth,
+  selectAuth,
+} from "@/redux/features/auth/AuthSlice";
+import { useSelector } from "react-redux";
 
 // form validation shema
 const formValidationSchema = z.object({
@@ -30,18 +36,21 @@ const formValidationSchema = z.object({
 
 const Login = () => {
   const [login] = useLoginMutation();
+  const dispatch = useAppDispatch();
+  const auth = useSelector(selectAuth);
+  console.log(auth);
 
   // define form
   const form = useForm<z.infer<typeof formValidationSchema>>({
     resolver: zodResolver(formValidationSchema),
     defaultValues: {
-      email: "",
-      password: "",
+      email: "myemail.abc20@gmail.com",
+      password: "user1234",
     },
   });
 
   // submit login handler
-  async function handleSignUp(values: z.infer<typeof formValidationSchema>) {
+  async function handleLogin(values: z.infer<typeof formValidationSchema>) {
     toast.loading("Loging in...", { id: "login" });
 
     // user data for sending to server
@@ -54,8 +63,8 @@ const Login = () => {
       const res = await login(loginData).unwrap();
       if (res.success) {
         toast.success("Login successful", { id: "login" });
-        // form.reset();
-        console.log(res);
+        dispatch(saveToAuth(res));
+        form.reset();
       }
     } catch (error: any) {
       toast.error(error?.data?.message, { id: "login" });
@@ -74,7 +83,7 @@ const Login = () => {
             </CardTitle>
             <Form {...form}>
               <form
-                onSubmit={form.handleSubmit(handleSignUp)}
+                onSubmit={form.handleSubmit(handleLogin)}
                 className="space-y-4 px-1"
               >
                 <FormField
