@@ -5,7 +5,7 @@ export const searchFacilities = (
   facilities: TFacility[],
   query: string,
   minPrice: number = 0,
-  maxPrice: number = Infinity
+  maxPrice: number = Infinity || Infinity
 ): TFacility[] => {
   // Normalize the search query
   const normalCaseQuery = query.toLowerCase();

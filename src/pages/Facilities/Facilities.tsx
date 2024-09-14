@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import Container from "@/components/shared/Container";
 import { useGetAllFacilitiesQuery } from "@/redux/features/facility/facilityApi";
 import { TFacility } from "@/types/TFacility";
@@ -6,7 +7,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Search } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Label } from "@/components/ui/label";
 import { searchFacilities } from "@/utils/searchFacilities";
 
@@ -19,8 +20,17 @@ const Facilities = () => {
   const [search, setSearch] = useState("");
   const [minPrice, setMinPrice] = useState(0);
   const [maxPrice, setMaxPrice] = useState(Infinity);
+  const [searchResult, setSearchResult] = useState<TFacility[]>([]);
 
-  const searchResult = searchFacilities(facilities, search, minPrice, maxPrice);
+  useEffect(() => {
+    const result = searchFacilities(
+      facilities,
+      search,
+      minPrice,
+      maxPrice || Infinity
+    );
+    setSearchResult(result);
+  }, [search, minPrice, maxPrice]);
 
   return (
     <Container>
