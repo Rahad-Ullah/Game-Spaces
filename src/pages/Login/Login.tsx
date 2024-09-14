@@ -38,8 +38,8 @@ const Login = () => {
   const form = useForm<z.infer<typeof formValidationSchema>>({
     resolver: zodResolver(formValidationSchema),
     defaultValues: {
-      email: "myemail.abc20@gmail.com",
-      password: "user1234",
+      email: "",
+      password: "",
     },
   });
 

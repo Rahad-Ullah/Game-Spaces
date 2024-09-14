@@ -179,7 +179,10 @@ const Navbar = () => {
             </DropdownMenuItem>
             <DropdownMenuItem>Settings</DropdownMenuItem>
             <DropdownMenuSeparator />
-            <DropdownMenuItem onClick={() => dispatch(logOut())}>
+            <DropdownMenuItem
+              onClick={() => dispatch(logOut())}
+              className="text-destructive"
+            >
               Logout
             </DropdownMenuItem>
           </DropdownMenuContent>
