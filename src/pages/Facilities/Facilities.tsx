@@ -20,7 +20,7 @@ const Facilities = () => {
   const [search, setSearch] = useState("");
   const [minPrice, setMinPrice] = useState(0);
   const [maxPrice, setMaxPrice] = useState(Infinity);
-  const [searchResult, setSearchResult] = useState<TFacility[]>([]);
+  const [searchResult, setSearchResult] = useState<TFacility[]>(facilities);
 
   useEffect(() => {
     const result = searchFacilities(
@@ -30,7 +30,7 @@ const Facilities = () => {
       maxPrice || Infinity
     );
     setSearchResult(result);
-  }, [search, minPrice, maxPrice]);
+  }, [search, minPrice, maxPrice, isFetching]);
 
   return (
     <Container>
@@ -69,7 +69,7 @@ const Facilities = () => {
             }}
             type="number"
             placeholder="Min Price"
-            className="max-w-28"
+            className="max-w-24 md:max-w-28"
           />
           <Input
             onChange={(e) => {
@@ -77,7 +77,7 @@ const Facilities = () => {
             }}
             type="number"
             placeholder="Max Price"
-            className="max-w-28"
+            className="max-w-24 md:max-w-28"
           />
         </div>
 

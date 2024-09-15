@@ -156,6 +156,10 @@ const Navbar = () => {
       </NavigationMenu>
 
       {/* Right side menu items */}
+      <h1 className="lg:hidden text-xl md:text-2xl font-extrabold">
+        <span className="text-primary">Game</span>Space
+      </h1>
+
       {user.accessToken ? (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
