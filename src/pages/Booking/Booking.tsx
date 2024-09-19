@@ -59,8 +59,9 @@ const Booking = () => {
   const { data: availableSlots, isFetching: isSlotFetching } =
     useCheckAvailabilityQuery({
       id,
-      formatedDate,
+      date: formatedDate,
     });
+  console.log(availableSlots);
 
   // define form
   const form = useForm<z.infer<typeof formValidationSchema>>({
@@ -109,7 +110,7 @@ const Booking = () => {
                 </div>
               </div>
             ) : (
-              <div className="flex gap-6 bg-white rounded-2xl p-6">
+              <div className="flex flex-col md:flex-row gap-6 bg-white rounded-2xl p-6">
                 <img
                   src={facility?.image}
                   alt="facility image"
@@ -130,7 +131,7 @@ const Booking = () => {
             {/* check availability */}
             <div className="bg-white rounded-2xl p-6 mt-6">
               <h1 className="text-lg font-semibold mb-4">Check Availability</h1>
-              <div className="flex gap-6">
+              <div className="flex flex-wrap gap-6">
                 <div className="flex-1">
                   <DatePicker date={date} setDate={setDate} />
                 </div>
