@@ -5,6 +5,6 @@ export const formatDate = (date: Date): string => {
   const month = String(utcFormatedDate.getMonth() + 1).padStart(2, "0");
   const year = utcFormatedDate.getFullYear();
 
-  const formatedDate = `${day}-${month}-${year}`;
+  const formatedDate = `${year}-${month}-${day}`;
   return formatedDate;
 };

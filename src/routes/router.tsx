@@ -5,6 +5,8 @@ import Facilities from "@/pages/Facilities/Facilities";
 import FacilityDetails from "@/pages/FacilityDetails/FacilityDetails";
 import Home from "@/pages/Home/Home";
 import Login from "@/pages/Login/Login";
+import PaymentFail from "@/pages/Payment/PaymentFail";
+import PaymentSuccess from "@/pages/Payment/PaymentSuccess";
 import SignUp from "@/pages/SignUp/SignUp";
 import { createBrowserRouter } from "react-router-dom";
 
@@ -29,6 +31,14 @@ const router = createBrowserRouter([
       {
         path: "/booking/:id",
         element: <Booking />,
+      },
+      {
+        path: "/payment/success/:id",
+        element: <PaymentSuccess />,
+      },
+      {
+        path: "/payment/fail/:id",
+        element: <PaymentFail />,
       },
       {
         path: "/sign-up",

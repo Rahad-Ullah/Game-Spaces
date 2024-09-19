@@ -23,7 +23,7 @@ export function DatePicker({ date, setDate }: TDatePicker) {
         <Button
           variant={"outline"}
           className={cn(
-            "w-full md:w-[280px] justify-start text-left font-normal md:text-base md:py-6",
+            "w-full justify-start text-left font-normal md:py-6",
             !date && "text-muted-foreground"
           )}
         >
