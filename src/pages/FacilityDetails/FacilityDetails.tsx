@@ -19,7 +19,7 @@ const FacilityDetails = () => {
           <Loader2 className="animate-spin" />
         </div>
       ) : (
-        <div className="flex flex-col-reverse md:flex-row gap-10 my-12">
+        <div className="flex flex-col md:flex-row gap-10 my-12">
           <div className="md:max-w-xs lg:max-w-sm xl:max-w-md">
             <img
               src={facility?.image}

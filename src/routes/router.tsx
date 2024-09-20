@@ -1,5 +1,7 @@
+import DashboardLayout from "@/components/layout/DashboardLayout";
 import MainLayout from "@/components/layout/MainLayout";
 import Booking from "@/pages/Booking/Booking";
+import Dashboard from "@/pages/Dashboard/Dashboard";
 import ErrorPage from "@/pages/Error/ErrorPage";
 import Facilities from "@/pages/Facilities/Facilities";
 import FacilityDetails from "@/pages/FacilityDetails/FacilityDetails";
@@ -47,6 +49,20 @@ const router = createBrowserRouter([
       {
         path: "/login",
         element: <Login />,
+      },
+    ],
+  },
+  {
+    path: "/dashboard",
+    element: <DashboardLayout />,
+    children: [
+      {
+        path: 'index',
+        element: <Dashboard />,
+      },
+      {
+        path: 'orders',
+        element: <Dashboard />,
       },
     ],
   },

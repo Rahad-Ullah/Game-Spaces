@@ -61,7 +61,6 @@ const Booking = () => {
       id,
       date: formatedDate,
     });
-  console.log(availableSlots);
 
   // define form
   const form = useForm<z.infer<typeof formValidationSchema>>({

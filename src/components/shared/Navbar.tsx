@@ -97,7 +97,7 @@ const Navbar = () => {
       <div className="hidden lg:flex">
         <Link to="/" className="flex items-center gap-2 group">
           <h1 className="text-2xl font-extrabold">
-            <span className="text-primary">Game</span>Space
+            <span className="text-primary">Game</span>Spaces
           </h1>
         </Link>
       </div>
@@ -157,7 +157,7 @@ const Navbar = () => {
 
       {/* Right side menu items */}
       <h1 className="lg:hidden text-xl md:text-2xl font-extrabold">
-        <span className="text-primary">Game</span>Space
+        <span className="text-primary">Game</span>Spaces
       </h1>
 
       {user.accessToken ? (
