@@ -20,11 +20,11 @@ import {
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
 import { useAppDispatch } from "@/redux/hook";
+import user_photo from "../../assets/icons/user.png";
 
 const Navbar = () => {
   const user = useSelector(selectAuth);
   const dispatch = useAppDispatch();
-  console.log(user);
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
@@ -163,12 +163,24 @@ const Navbar = () => {
       {user.accessToken ? (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button
-              variant="outline"
-              className="overflow-hidden rounded-full size-10 p-2"
-            >
-              <User size={24} className="overflow-hidden rounded-full" />
-            </Button>
+            {user?.user ? (
+              <Button
+                variant="outline"
+                className="overflow-hidden rounded-full size-10 p-0 hover:border-primary"
+              >
+                <img
+                  src={user_photo}
+                  className="overflow-hidden rounded-full"
+                />
+              </Button>
+            ) : (
+              <Button
+                variant="outline"
+                className="overflow-hidden rounded-full size-10 p-2"
+              >
+                <User size={24} className="overflow-hidden rounded-full" />
+              </Button>
+            )}
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>

@@ -5,7 +5,6 @@ import {
   Menu,
   Search,
   Ticket,
-  User,
   Users,
 } from "lucide-react";
 
@@ -36,6 +35,7 @@ import {
   selectCurrentUser,
 } from "@/redux/features/auth/AuthSlice";
 import { NavLink } from "react-router-dom";
+import user_photo from "../../assets/icons/user.png";
 
 const DashboardLayout = () => {
   const auth = useAppSelector(selectAuth);
@@ -247,19 +247,27 @@ const DashboardLayout = () => {
             {auth.accessToken ? (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button
-                    variant="outline"
-                    className="overflow-hidden rounded-full size-10 p-2"
-                  >
-                    <User size={24} className="overflow-hidden rounded-full" />
-                  </Button>
+                  <div className="flex items-center gap-2 cursor-pointer pr-4">
+                    <Button
+                      variant="outline"
+                      className="overflow-hidden rounded-full size-10 p-0 hover:border-primary"
+                    >
+                      <img
+                        src={user_photo}
+                        className="overflow-hidden rounded-full"
+                      />
+                    </Button>
+                    <div>
+                      <h3 className="text-sm font-bold">{user?.name}</h3>
+                      <p className="text-xs font-medium text-zinc-500">
+                        {user?.email}
+                      </p>
+                    </div>
+                  </div>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end">
                   <DropdownMenuLabel>
-                    <p>{auth?.user?.name}</p>
-                    <p className="font-normal text-xs text-zinc-600">
-                      {auth?.user?.email}
-                    </p>
+                    <p>My Account</p>
                   </DropdownMenuLabel>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem>
