@@ -6,6 +6,7 @@ import {
   Package,
   Search,
   ShoppingCart,
+  Ticket,
   User,
   Users,
 } from "lucide-react";
@@ -35,7 +36,7 @@ import { logOut, selectAuth } from "@/redux/features/auth/AuthSlice";
 import { NavLink } from "react-router-dom";
 
 const DashboardLayout = () => {
-  const user = useAppSelector(selectAuth);
+  const auth = useAppSelector(selectAuth);
   const dispatch = useAppDispatch();
 
   return (
@@ -72,7 +73,7 @@ const DashboardLayout = () => {
                   Dashboard
                 </NavLink>
                 <NavLink
-                  to="/dashboard/orders"
+                  to="/dashboard/bookings"
                   className={({ isActive, isPending }) =>
                     isPending
                       ? "pending"
@@ -81,14 +82,14 @@ const DashboardLayout = () => {
                       : "flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
                   }
                 >
-                  <ShoppingCart className="h-4 w-4" />
-                  Orders
+                  <Ticket className="h-4 w-4" />
+                  {auth?.user?.role === "admin" ? "Bookings" : "My Bookings"}
                   <Badge className="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full">
                     6
                   </Badge>
                 </NavLink>
                 <NavLink
-                  to="/dashboard/products"
+                  to="/dashboard/facilities"
                   className={({ isActive, isPending }) =>
                     isPending
                       ? "pending"
@@ -98,10 +99,10 @@ const DashboardLayout = () => {
                   }
                 >
                   <Package className="h-4 w-4" />
-                  Products{" "}
+                  Facilities{" "}
                 </NavLink>
                 <NavLink
-                  to="/dashboard/customers"
+                  to="/dashboard/admins"
                   className={({ isActive, isPending }) =>
                     isPending
                       ? "pending"
@@ -111,20 +112,7 @@ const DashboardLayout = () => {
                   }
                 >
                   <Users className="h-4 w-4" />
-                  Customers
-                </NavLink>
-                <NavLink
-                  to="/dashboard/analytics"
-                  className={({ isActive, isPending }) =>
-                    isPending
-                      ? "pending"
-                      : isActive
-                      ? "flex items-center gap-3 rounded-lg px-3 py-2 bg-muted text-primary transition-all hover:text-primary"
-                      : "flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
-                  }
-                >
-                  <LineChart className="h-4 w-4" />
-                  Analytics
+                  Admins
                 </NavLink>
               </nav>
             </div>
@@ -228,7 +216,7 @@ const DashboardLayout = () => {
               </form>
             </div>
             {/* user profile in the right side */}
-            {user.accessToken ? (
+            {auth.accessToken ? (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button
@@ -240,9 +228,9 @@ const DashboardLayout = () => {
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end">
                   <DropdownMenuLabel>
-                    <p>{user?.user?.name}</p>
+                    <p>{auth?.user?.name}</p>
                     <p className="font-normal text-xs text-zinc-600">
-                      {user?.user?.email}
+                      {auth?.user?.email}
                     </p>
                   </DropdownMenuLabel>
                   <DropdownMenuSeparator />

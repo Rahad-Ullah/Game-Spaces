@@ -1,6 +1,7 @@
 import DashboardLayout from "@/components/layout/DashboardLayout";
 import MainLayout from "@/components/layout/MainLayout";
 import Booking from "@/pages/Booking/Booking";
+import Bookings from "@/pages/Dashboard/Bookings/Bookings";
 import Dashboard from "@/pages/Dashboard/Dashboard";
 import ErrorPage from "@/pages/Error/ErrorPage";
 import Facilities from "@/pages/Facilities/Facilities";
@@ -57,12 +58,12 @@ const router = createBrowserRouter([
     element: <DashboardLayout />,
     children: [
       {
-        path: 'index',
+        path: "index",
         element: <Dashboard />,
       },
       {
-        path: 'orders',
-        element: <Dashboard />,
+        path: "bookings",
+        element: <Bookings />,
       },
     ],
   },
