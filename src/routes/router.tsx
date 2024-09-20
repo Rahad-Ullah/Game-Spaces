@@ -65,6 +65,14 @@ const router = createBrowserRouter([
         path: "bookings",
         element: <Bookings />,
       },
+      {
+        path: "facilities",
+        element: <Bookings />,
+      },
+      {
+        path: "admins",
+        element: <Bookings />,
+      },
     ],
   },
 ]);

@@ -179,7 +179,7 @@ const Navbar = () => {
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuItem>
-              <Link to={"/dashboard"}>Dashboard</Link>
+              <Link to={"/dashboard/index"}>Dashboard</Link>
             </DropdownMenuItem>
             <DropdownMenuItem>Settings</DropdownMenuItem>
             <DropdownMenuSeparator />

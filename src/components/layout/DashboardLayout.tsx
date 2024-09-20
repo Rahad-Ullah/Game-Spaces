@@ -1,11 +1,9 @@
 import {
   Bell,
+  Dumbbell,
   Home,
-  LineChart,
   Menu,
-  Package,
   Search,
-  ShoppingCart,
   Ticket,
   User,
   Users,
@@ -32,11 +30,16 @@ import { Input } from "@/components/ui/input";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Link, Outlet } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
-import { logOut, selectAuth } from "@/redux/features/auth/AuthSlice";
+import {
+  logOut,
+  selectAuth,
+  selectCurrentUser,
+} from "@/redux/features/auth/AuthSlice";
 import { NavLink } from "react-router-dom";
 
 const DashboardLayout = () => {
   const auth = useAppSelector(selectAuth);
+  const user = useAppSelector(selectCurrentUser);
   const dispatch = useAppDispatch();
 
   return (
@@ -44,21 +47,21 @@ const DashboardLayout = () => {
       <div className="grid min-h-screen w-full lg:grid-cols-[280px_1fr] gap-2">
         {/* sidebar for large screen */}
         <div className="hidden shadow-md lg:block">
-          <div className="flex h-full max-h-screen flex-col gap-2 p-4">
-            <div className="flex h-14 items-center lg:h-[60px] border-b">
+          <div className="flex h-full max-h-screen flex-col gap-6 p-4">
+            <div className="flex h-14 items-center lg:h-[60px] pb-2 shadow-sm">
               <Link to="/" className="flex items-center gap-2">
-                <h1 className="text-xl font-extrabold">
+                <h1 className="text-2xl font-extrabold">
                   <span className="text-primary">Game</span>Spaces
                 </h1>
               </Link>
               <Button variant="outline" size="icon" className="ml-auto h-8 w-8">
-                <Bell className="h-4 w-4" />
+                <Bell className="size-4" />
                 <span className="sr-only">Toggle notifications</span>
               </Button>
             </div>
             {/* nav menu */}
             <div className="flex-1">
-              <nav className="grid items-start text-sm font-medium">
+              <nav className="grid items-start gap-2 font-medium">
                 <NavLink
                   to="/dashboard/index"
                   className={({ isActive, isPending }) =>
@@ -69,7 +72,7 @@ const DashboardLayout = () => {
                       : "flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
                   }
                 >
-                  <Home className="h-4 w-4" />
+                  <Home className="size-5" />
                   Dashboard
                 </NavLink>
                 <NavLink
@@ -82,38 +85,42 @@ const DashboardLayout = () => {
                       : "flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
                   }
                 >
-                  <Ticket className="h-4 w-4" />
+                  <Ticket className="size-5" />
                   {auth?.user?.role === "admin" ? "Bookings" : "My Bookings"}
                   <Badge className="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full">
                     6
                   </Badge>
                 </NavLink>
-                <NavLink
-                  to="/dashboard/facilities"
-                  className={({ isActive, isPending }) =>
-                    isPending
-                      ? "pending"
-                      : isActive
-                      ? "flex items-center gap-3 rounded-lg px-3 py-2 bg-muted text-primary transition-all hover:text-primary"
-                      : "flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
-                  }
-                >
-                  <Package className="h-4 w-4" />
-                  Facilities{" "}
-                </NavLink>
-                <NavLink
-                  to="/dashboard/admins"
-                  className={({ isActive, isPending }) =>
-                    isPending
-                      ? "pending"
-                      : isActive
-                      ? "flex items-center gap-3 rounded-lg px-3 py-2 bg-muted text-primary transition-all hover:text-primary"
-                      : "flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
-                  }
-                >
-                  <Users className="h-4 w-4" />
-                  Admins
-                </NavLink>
+                {user?.role === "admin" && (
+                  <div className="flex flex-col gap-2">
+                    <NavLink
+                      to="/dashboard/facilities"
+                      className={({ isActive, isPending }) =>
+                        isPending
+                          ? "pending"
+                          : isActive
+                          ? "flex items-center gap-3 rounded-lg px-3 py-2 bg-muted text-primary transition-all hover:text-primary"
+                          : "flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
+                      }
+                    >
+                      <Dumbbell className="size-5" />
+                      Facilities{" "}
+                    </NavLink>
+                    <NavLink
+                      to="/dashboard/admins"
+                      className={({ isActive, isPending }) =>
+                        isPending
+                          ? "pending"
+                          : isActive
+                          ? "flex items-center gap-3 rounded-lg px-3 py-2 bg-muted text-primary transition-all hover:text-primary"
+                          : "flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
+                      }
+                    >
+                      <Users className="size-5" />
+                      Admins
+                    </NavLink>
+                  </div>
+                )}
               </nav>
             </div>
             <div className="mt-auto">
@@ -136,7 +143,7 @@ const DashboardLayout = () => {
         </div>
 
         {/* main ui */}
-        <div className="flex flex-col w-full gap-2 p-4">
+        <div className="flex flex-col w-full gap-6 p-4">
           <header className="flex h-14 items-center gap-4 lg:h-[60px] pb-2 shadow-sm">
             {/* sidebar toggle menu icon for small screen */}
             <Sheet>
@@ -152,53 +159,74 @@ const DashboardLayout = () => {
               </SheetTrigger>
               <SheetContent side="left" className="flex flex-col">
                 {/* nav menus */}
-                <nav className="grid gap-2 text-lg font-medium">
-                  <Link
-                    to="/"
-                    className="flex items-center gap-2 text-lg font-semibold"
+                <Link
+                  to="/"
+                  className="flex items-center gap-2 text-lg font-semibold"
+                >
+                  <h1 className="text-xl font-extrabold">
+                    <span className="text-primary">Game</span>Spaces
+                  </h1>
+                </Link>
+                <nav className="grid items-start gap-2 font-medium">
+                  <NavLink
+                    to="/dashboard/index"
+                    className={({ isActive, isPending }) =>
+                      isPending
+                        ? "pending"
+                        : isActive
+                        ? "flex items-center gap-3 rounded-lg px-3 py-2 bg-muted text-primary transition-all hover:text-primary"
+                        : "flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
+                    }
                   >
-                    <h1 className="text-xl font-extrabold">
-                      <span className="text-primary">Game</span>Spaces
-                    </h1>
-                  </Link>
-                  <Link
-                    to="#"
-                    className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
-                  >
-                    <Home className="h-5 w-5" />
+                    <Home className="size-5" />
                     Dashboard
-                  </Link>
-                  <Link
-                    to="#"
-                    className="mx-[-0.65rem] flex items-center gap-4 rounded-xl bg-muted px-3 py-2 text-foreground hover:text-foreground"
+                  </NavLink>
+                  <NavLink
+                    to="/dashboard/bookings"
+                    className={({ isActive, isPending }) =>
+                      isPending
+                        ? "pending"
+                        : isActive
+                        ? "flex items-center gap-3 rounded-lg px-3 py-2 bg-muted text-primary transition-all hover:text-primary"
+                        : "flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
+                    }
                   >
-                    <ShoppingCart className="h-5 w-5" />
-                    Orders
+                    <Ticket className="size-5" />
+                    {auth?.user?.role === "admin" ? "Bookings" : "My Bookings"}
                     <Badge className="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full">
                       6
                     </Badge>
-                  </Link>
-                  <Link
-                    to="#"
-                    className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
-                  >
-                    <Package className="h-5 w-5" />
-                    Products
-                  </Link>
-                  <Link
-                    to="#"
-                    className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
-                  >
-                    <Users className="h-5 w-5" />
-                    Customers
-                  </Link>
-                  <Link
-                    to="#"
-                    className="mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 text-muted-foreground hover:text-foreground"
-                  >
-                    <LineChart className="h-5 w-5" />
-                    Analytics
-                  </Link>
+                  </NavLink>
+                  {user?.role === "admin" && (
+                    <div className="flex flex-col gap-2">
+                      <NavLink
+                        to="/dashboard/facilities"
+                        className={({ isActive, isPending }) =>
+                          isPending
+                            ? "pending"
+                            : isActive
+                            ? "flex items-center gap-3 rounded-lg px-3 py-2 bg-muted text-primary transition-all hover:text-primary"
+                            : "flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
+                        }
+                      >
+                        <Dumbbell className="size-5" />
+                        Facilities{" "}
+                      </NavLink>
+                      <NavLink
+                        to="/dashboard/admins"
+                        className={({ isActive, isPending }) =>
+                          isPending
+                            ? "pending"
+                            : isActive
+                            ? "flex items-center gap-3 rounded-lg px-3 py-2 bg-muted text-primary transition-all hover:text-primary"
+                            : "flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
+                        }
+                      >
+                        <Users className="size-5" />
+                        Admins
+                      </NavLink>
+                    </div>
+                  )}
                 </nav>
               </SheetContent>
             </Sheet>
@@ -206,7 +234,7 @@ const DashboardLayout = () => {
             <div className="w-full flex-1">
               <form>
                 <div className="relative">
-                  <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+                  <Search className="absolute left-2.5 top-2.5 size-5 text-muted-foreground" />
                   <Input
                     type="search"
                     placeholder="Search products..."
@@ -235,7 +263,7 @@ const DashboardLayout = () => {
                   </DropdownMenuLabel>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem>
-                    <Link to={"/dashboard"}>Dashboard</Link>
+                    <Link to={"/dashboard/index"}>Dashboard</Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem>Settings</DropdownMenuItem>
                   <DropdownMenuSeparator />
