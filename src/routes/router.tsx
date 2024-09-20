@@ -2,7 +2,7 @@ import DashboardLayout from "@/components/layout/DashboardLayout";
 import MainLayout from "@/components/layout/MainLayout";
 import Booking from "@/pages/Booking/Booking";
 import Bookings from "@/pages/Dashboard/Bookings/Bookings";
-import Dashboard from "@/pages/Dashboard/Dashboard";
+import Dashboard from "@/pages/Dashboard/Home/Dashboard";
 import ErrorPage from "@/pages/Error/ErrorPage";
 import Facilities from "@/pages/Facilities/Facilities";
 import FacilityDetails from "@/pages/FacilityDetails/FacilityDetails";
