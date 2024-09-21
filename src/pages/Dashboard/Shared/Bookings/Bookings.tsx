@@ -1,25 +1,193 @@
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Skeleton } from "@/components/ui/skeleton";
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import { selectCurrentUser } from "@/redux/features/auth/AuthSlice";
+import { useGetBookingsByUserQuery } from "@/redux/features/booking/bookingApi";
+import { useAppSelector } from "@/redux/hook";
+import { TBooking } from "@/types/TBooking";
+import { formatDate } from "@/utils/formatDate";
+import { MoreHorizontal } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Bookings = () => {
+  // get current user
+  const user = useAppSelector(selectCurrentUser);
+
+  // get today date
+  const today = new Date();
+
+  // get bookings data
+  const { data, isFetching } = useGetBookingsByUserQuery(user?._id);
+  // add booking status property
+  const bookings = data?.data?.map((item: TBooking) =>
+    item?.date === formatDate(today)
+      ? { ...item, status: "On going" }
+      : new Date(item?.date) < today
+      ? { ...item, status: "Passed" }
+      : { ...item, status: "Upcoming" }
+  );
+
   return (
     <div className="flex flex-1 flex-col gap-4 lg:gap-6">
-      <div className="flex items-center">
-        <h1 className="text-lg font-semibold md:text-2xl">Bookings</h1>
-      </div>
-      <div
-        className="flex flex-1 items-center justify-center rounded-lg border border-dashed shadow-sm"
-        x-chunk="dashboard-02-chunk-1"
-      >
-        <div className="flex flex-col items-center gap-1 text-center">
-          <h3 className="text-2xl font-bold tracking-tight">
-            You have no bookings
-          </h3>
-          <p className="text-sm text-muted-foreground">
-            You can start selling as soon as you add a product.
-          </p>
-          <Button className="mt-4">Book Now</Button>
-        </div>
-      </div>
+      <main className="grid flex-1 items-start gap-4 sm:py-0 md:gap-8">
+        <Card className="grid flex-1 h-full shadow-none">
+          <CardHeader>
+            <CardTitle className="text-2xl font-bold">My Bookings</CardTitle>
+            <CardDescription>
+              Manage your bookings and view their time slots.
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead className="hidden w-[100px] md:table-cell">
+                    <span className="sr-only">Image</span>
+                  </TableHead>
+                  <TableHead>Name</TableHead>
+                  <TableHead>Status</TableHead>
+                  <TableHead className="hidden md:table-cell">
+                    Location
+                  </TableHead>
+                  <TableHead className="hidden md:table-cell">Date</TableHead>
+                  <TableHead className="hidden md:table-cell">Time</TableHead>
+                  <TableHead>
+                    <span className="sr-only">Actions</span>
+                  </TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {/* show skeleton when fetching */}
+                {isFetching
+                  ? Array.from({ length: 5 })?.map((_, index) => (
+                      <TableRow key={index}>
+                        <TableCell className="hidden sm:table-cell">
+                          <Skeleton className="w-full h-16" />
+                        </TableCell>
+                        <TableCell className="font-medium">
+                          <Skeleton className="w-full h-5" />
+                        </TableCell>
+                        <TableCell>
+                          <Skeleton className="w-full h-5" />
+                        </TableCell>
+                        <TableCell className="hidden md:table-cell">
+                          <Skeleton className="w-full h-5" />
+                        </TableCell>
+                        <TableCell className="hidden md:table-cell">
+                          <Skeleton className="w-full h-5" />
+                        </TableCell>
+                        <TableCell className="hidden md:table-cell">
+                          <Skeleton className="w-full h-5" />
+                        </TableCell>
+                        <TableCell>
+                          <Skeleton className="w-full h-5" />
+                        </TableCell>
+                      </TableRow>
+                    ))
+                  : // display date when fetching completed
+                    bookings?.map((item: TBooking, index: number) => (
+                      <TableRow key={index}>
+                        <TableCell className="hidden md:table-cell">
+                          <img
+                            alt="Product image"
+                            className="aspect-square rounded-md object-cover"
+                            height="64"
+                            src={item?.facility?.image}
+                            width="64"
+                          />
+                        </TableCell>
+                        <TableCell className="font-medium">
+                          {item?.facility?.name}
+                        </TableCell>
+                        <TableCell>
+                          <Badge variant="outline">{item?.status}</Badge>
+                        </TableCell>
+                        <TableCell className="hidden md:table-cell">
+                          {item?.facility?.location}
+                        </TableCell>
+                        <TableCell className="hidden md:table-cell">
+                          {item?.date}
+                        </TableCell>
+                        <TableCell className="hidden md:table-cell">
+                          {item?.startTime} - {item?.startTime}
+                        </TableCell>
+                        <TableCell>
+                          <DropdownMenu>
+                            <DropdownMenuTrigger asChild>
+                              <Button
+                                aria-haspopup="true"
+                                size="icon"
+                                variant="ghost"
+                              >
+                                <MoreHorizontal className="h-4 w-4" />
+                                <span className="sr-only">Toggle menu</span>
+                              </Button>
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent align="end">
+                              <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                              <DropdownMenuItem>
+                                <Link to={""}>View Details</Link>
+                              </DropdownMenuItem>
+                              <DropdownMenuItem>
+                                <Link to={""}>Cancel</Link>
+                              </DropdownMenuItem>
+                            </DropdownMenuContent>
+                          </DropdownMenu>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+              </TableBody>
+              {bookings?.length < 1 && (
+                <TableCaption>
+                  {/* show no data found message if bookings is empty */}
+                  <div className="text-center w-full mt-14">
+                    <h3 className="text-2xl font-bold tracking-tight">
+                      You have no bookings
+                    </h3>
+                    <p className="text-sm text-muted-foreground">
+                      You can start enjoying as soon as you book a facility.
+                    </p>
+                    <Button className="mt-4">Book Now</Button>
+                  </div>
+                </TableCaption>
+              )}
+            </Table>
+          </CardContent>
+          {/* showing range of pagination */}
+          {bookings?.length > 0 && (
+            <CardFooter>
+              <div className="text-xs text-muted-foreground">
+                Showing <strong>1-{bookings?.length}</strong> of{" "}
+                <strong>{bookings?.length}</strong> bookings
+              </div>
+            </CardFooter>
+          )}
+        </Card>
+      </main>
     </div>
   );
 };

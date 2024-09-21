@@ -1,7 +1,7 @@
 import { selectCurrentUser } from "@/redux/features/auth/AuthSlice";
 import { useAppSelector } from "@/redux/hook";
 import { getToday } from "@/utils/getToday";
-import player_img from "@/assets/images/yellow footballer.webp";
+import player_img from "@/assets/images/player.webp";
 
 const WelcomeBanner = () => {
   const user = useAppSelector(selectCurrentUser);
@@ -21,8 +21,8 @@ const WelcomeBanner = () => {
           </p>
         </div>
       </div>
-      <div className="hidden md:flex xl:pr-10 items-center">
-        <img src={player_img} alt="player image" className="w-full md:w-96" />
+      <div className="hidden md:flex md:pr-10 xl:pr-14 pt-2 items-center">
+        <img src={player_img} alt="player image" className="w-full md:w-64" />
       </div>
     </div>
   );

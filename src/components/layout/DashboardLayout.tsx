@@ -46,8 +46,8 @@ const DashboardLayout = () => {
     <div>
       <div className="grid min-h-screen w-full lg:grid-cols-[280px_1fr] gap-2">
         {/* sidebar for large screen */}
-        <div className="hidden shadow-md lg:block">
-          <div className="flex h-full max-h-screen flex-col gap-6 p-4">
+        <div className="hidden lg:block">
+          <div className="flex max-w-[280px] h-full max-h-screen flex-col gap-6 p-4 shadow-md fixed left-0 top-0">
             <div className="flex h-14 items-center lg:h-[60px] pb-2 shadow-sm">
               <Link to="/" className="flex items-center gap-2">
                 <h1 className="text-2xl font-extrabold">
@@ -143,8 +143,8 @@ const DashboardLayout = () => {
         </div>
 
         {/* main ui */}
-        <div className="flex flex-col w-full gap-6 p-4">
-          <header className="flex h-14 items-center gap-4 lg:h-[60px] pb-2 shadow-sm">
+        <div className="flex flex-col w-full gap-6 p-4 pt-0">
+          <header className="flex h-14 items-center gap-4 lg:h-[75px] shadow-sm sticky top-0 z-20 bg-white">
             {/* sidebar toggle menu icon for small screen */}
             <Sheet>
               <SheetTrigger asChild>

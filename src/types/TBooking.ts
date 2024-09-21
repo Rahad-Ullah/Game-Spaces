@@ -11,4 +11,5 @@ export type TBooking = {
   paymentStatus: string;
   isBooked: string;
   trxID: string;
+  status?: "On going" | "Passed" | "Upcoming";
 };
