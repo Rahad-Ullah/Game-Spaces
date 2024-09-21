@@ -36,6 +36,7 @@ import { capitalizeFirstLetter } from "@/utils/capitalizeFirstLetter";
 import { formatDate } from "@/utils/formatDate";
 import { MoreHorizontal } from "lucide-react";
 import { toast } from "sonner";
+import DetailsDialog from "./DetailsDialog";
 
 const Bookings = () => {
   // get current user
@@ -174,14 +175,17 @@ const Bookings = () => {
                                 <span className="sr-only">Toggle menu</span>
                               </Button>
                             </DropdownMenuTrigger>
-                            <DropdownMenuContent align="end">
+                            <DropdownMenuContent
+                              align="end"
+                              className="space-y-1"
+                            >
                               <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                              <DropdownMenuItem className="cursor-pointer">
-                                View details
-                              </DropdownMenuItem>
+                              {/* view details button */}
+                              <DetailsDialog booking={item} />
+                              {/* cancel button */}
                               <DropdownMenuItem
                                 onClick={() => handleCancelBooking(item?._id)}
-                                className="cursor-pointer"
+                                className="cursor-pointer text-red-500"
                               >
                                 Cancel
                               </DropdownMenuItem>
