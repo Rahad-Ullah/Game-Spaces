@@ -1,7 +1,7 @@
 import { selectCurrentUser } from "@/redux/features/auth/AuthSlice";
 import { useAppSelector } from "@/redux/hook";
 import { getToday } from "@/utils/getToday";
-import player_img from "../../../assets/images/yellow footballer.webp";
+import player_img from "@/assets/images/yellow footballer.webp";
 
 const WelcomeBanner = () => {
   const user = useAppSelector(selectCurrentUser);
