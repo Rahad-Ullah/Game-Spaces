@@ -26,12 +26,16 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { selectCurrentUser } from "@/redux/features/auth/AuthSlice";
-import { useGetBookingsByUserQuery } from "@/redux/features/booking/bookingApi";
+import {
+  useCancelBookingMutation,
+  useGetBookingsByUserQuery,
+} from "@/redux/features/booking/bookingApi";
 import { useAppSelector } from "@/redux/hook";
 import { TBooking } from "@/types/TBooking";
+import { capitalizeFirstLetter } from "@/utils/capitalizeFirstLetter";
 import { formatDate } from "@/utils/formatDate";
 import { MoreHorizontal } from "lucide-react";
-import { Link } from "react-router-dom";
+import { toast } from "sonner";
 
 const Bookings = () => {
   // get current user
@@ -50,6 +54,22 @@ const Bookings = () => {
       ? { ...item, status: "Passed" }
       : { ...item, status: "Upcoming" }
   );
+
+  // cancel booking
+  const [cancelBooking] = useCancelBookingMutation();
+  const handleCancelBooking = async (id: string) => {
+    toast.loading("Canceling...", { id: "cancel" });
+    try {
+      const res = await cancelBooking(id).unwrap();
+      if (res.success) {
+        toast.success("Successfully Deleted", { id: "cancel" });
+      }
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
+      toast.error(error?.data?.message, { id: "cancel" });
+      console.log(error);
+    }
+  };
 
   return (
     <div className="flex flex-1 flex-col gap-4 lg:gap-6">
@@ -124,7 +144,14 @@ const Bookings = () => {
                           {item?.facility?.name}
                         </TableCell>
                         <TableCell>
-                          <Badge variant="outline">{item?.status}</Badge>
+                          <Badge
+                            variant="outline"
+                            className={`${
+                              item?.isBooked === "canceled" && "text-red-500"
+                            }`}
+                          >
+                            {capitalizeFirstLetter(item?.isBooked)}
+                          </Badge>
                         </TableCell>
                         <TableCell className="hidden md:table-cell">
                           {item?.facility?.location}
@@ -149,11 +176,14 @@ const Bookings = () => {
                             </DropdownMenuTrigger>
                             <DropdownMenuContent align="end">
                               <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                              <DropdownMenuItem>
-                                <Link to={""}>View Details</Link>
+                              <DropdownMenuItem className="cursor-pointer">
+                                View details
                               </DropdownMenuItem>
-                              <DropdownMenuItem>
-                                <Link to={""}>Cancel</Link>
+                              <DropdownMenuItem
+                                onClick={() => handleCancelBooking(item?._id)}
+                                className="cursor-pointer"
+                              >
+                                Cancel
                               </DropdownMenuItem>
                             </DropdownMenuContent>
                           </DropdownMenu>
