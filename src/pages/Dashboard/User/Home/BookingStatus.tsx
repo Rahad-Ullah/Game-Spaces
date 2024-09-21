@@ -37,9 +37,11 @@ const BookingStatus = () => {
         <CardContent className="">
           <div className="flex items-center gap-4">
             <div className="bg-primary text-white p-2 rounded-full">
-              <ShieldCheck size={30} />
+              <ShieldCheck className="size-6 md:size-8" />
             </div>
-            <h1 className="text-5xl font-semibold">{activeBookings?.length}</h1>
+            <h1 className="text-4xl md:text-5xl font-semibold">
+              {activeBookings?.length}
+            </h1>
           </div>
         </CardContent>
       </Card>
@@ -50,9 +52,11 @@ const BookingStatus = () => {
         <CardContent className="">
           <div className="flex items-center gap-4">
             <div className="bg-primary text-white p-2 rounded-full">
-              <ClockArrowUp size={30} />
+              <ClockArrowUp className="size-6 md:size-8" />
             </div>
-            <h1 className="text-5xl font-semibold">{recentBookings?.length}</h1>
+            <h1 className="text-4xl md:text-5xl font-semibold">
+              {recentBookings?.length}
+            </h1>
           </div>
         </CardContent>
       </Card>
@@ -63,9 +67,9 @@ const BookingStatus = () => {
         <CardContent className="">
           <div className="flex items-center gap-4">
             <div className="bg-primary text-white p-2 rounded-full">
-              <ClockArrowDown size={30} />
+              <ClockArrowDown className="size-6 md:size-8" />
             </div>
-            <h1 className="text-5xl font-semibold">
+            <h1 className="text-4xl md:text-5xl font-semibold">
               {upcomingBookings?.length}
             </h1>
           </div>

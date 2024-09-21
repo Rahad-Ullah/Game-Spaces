@@ -8,7 +8,6 @@ import {
   Users,
 } from "lucide-react";
 
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -87,9 +86,6 @@ const DashboardLayout = () => {
                 >
                   <Ticket className="size-5" />
                   {auth?.user?.role === "admin" ? "Bookings" : "My Bookings"}
-                  <Badge className="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full">
-                    6
-                  </Badge>
                 </NavLink>
                 {user?.role === "admin" && (
                   <div className="flex flex-col gap-2">
@@ -193,9 +189,6 @@ const DashboardLayout = () => {
                   >
                     <Ticket className="size-5" />
                     {auth?.user?.role === "admin" ? "Bookings" : "My Bookings"}
-                    <Badge className="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full">
-                      6
-                    </Badge>
                   </NavLink>
                   {user?.role === "admin" && (
                     <div className="flex flex-col gap-2">
@@ -247,7 +240,7 @@ const DashboardLayout = () => {
             {auth.accessToken ? (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <div className="flex items-center gap-2 cursor-pointer pr-4">
+                  <div className="flex items-center gap-2 cursor-pointer md:pr-4">
                     <Button
                       variant="outline"
                       className="overflow-hidden rounded-full size-10 p-0 hover:border-primary"
@@ -257,7 +250,7 @@ const DashboardLayout = () => {
                         className="overflow-hidden rounded-full"
                       />
                     </Button>
-                    <div>
+                    <div className="hidden md:block">
                       <h3 className="text-sm font-bold">{user?.name}</h3>
                       <p className="text-xs font-medium text-zinc-500">
                         {user?.email}

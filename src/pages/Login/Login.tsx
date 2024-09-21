@@ -67,7 +67,7 @@ const Login = () => {
   }
 
   return (
-    <div className=" py-14 bg-[url('https://png.pngtree.com/thumb_back/fw800/background/20230901/pngtree-a-group-of-sports-equipment-on-a-surface-image_13169788.jpg')] bg-fixed">
+    <div className=" py-14 bg-[url('https://png.pngtree.com/thumb_back/fw800/background/20230901/pngtree-a-group-of-sports-equipment-on-a-surface-image_13169788.jpg')] bg-fixed min-h-screen">
       <Container>
         <div className="flex w-full justify-center lg:justify-end items-center gap-10">
           {/* Login form */}

@@ -205,17 +205,17 @@ const Navbar = () => {
         </DropdownMenu>
       ) : (
         <div className="flex items-center gap-1">
-          <Link to={"/login"}>
+          <Link to={"/sign-up"} className="hidden lg:block">
             <Button
               variant={"ghost"}
               className="text-base relative flex items-center gap-2"
             >
-              Login
+              Sign up
             </Button>
           </Link>
-          <Link to={"/sign-up"}>
+          <Link to={"/login"}>
             <Button className="text-base relative flex items-center gap-2">
-              Sign up
+              Login
             </Button>
           </Link>
         </div>

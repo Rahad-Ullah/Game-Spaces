@@ -37,6 +37,7 @@ import { formatDate } from "@/utils/formatDate";
 import { MoreHorizontal } from "lucide-react";
 import { toast } from "sonner";
 import DetailsDialog from "./DetailsDialog";
+import { Link } from "react-router-dom";
 
 const Bookings = () => {
   // get current user
@@ -205,7 +206,9 @@ const Bookings = () => {
                     <p className="text-sm text-muted-foreground">
                       You can start enjoying as soon as you book a facility.
                     </p>
-                    <Button className="mt-4">Book Now</Button>
+                    <Link to={"/facilities"}>
+                      <Button className="mt-4">Book Now</Button>
+                    </Link>
                   </div>
                 </TableCaption>
               )}
