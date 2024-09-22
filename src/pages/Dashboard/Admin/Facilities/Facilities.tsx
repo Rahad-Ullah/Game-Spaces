@@ -1,4 +1,3 @@
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -25,50 +24,51 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { selectCurrentUser } from "@/redux/features/auth/AuthSlice";
-import {
-  useCancelBookingMutation,
-  useGetBookingsByUserQuery,
-} from "@/redux/features/booking/bookingApi";
-import { useAppSelector } from "@/redux/hook";
-import { TBooking } from "@/types/TBooking";
-import { capitalizeFirstLetter } from "@/utils/capitalizeFirstLetter";
-import { formatDate } from "@/utils/formatDate";
 import { MoreHorizontal } from "lucide-react";
-import { toast } from "sonner";
-import DetailsDialog from "./DetailsDialog";
 import { Link } from "react-router-dom";
+import { roundNumber } from "@/utils/roundNumber";
+import {
+  useDeleteFacilityMutation,
+  useGetAllFacilitiesQuery,
+  useUpdateFacilityMutation,
+} from "@/redux/features/facility/facilityApi";
+import { TFacility } from "@/types/TFacility";
+import { toast } from "sonner";
 
-const UserBookings = () => {
-  // get current user
-  const user = useAppSelector(selectCurrentUser);
+const AdminFacilities = () => {
+  // get facilities data
+  const { data, isFetching } = useGetAllFacilitiesQuery(undefined);
+  const facilities = data?.data;
 
-  // get today date
-  const today = new Date();
-
-  // get bookings data
-  const { data, isFetching } = useGetBookingsByUserQuery(user?._id);
-  // add booking status property
-  const bookings = data?.data?.map((item: TBooking) =>
-    item?.date === formatDate(today)
-      ? { ...item, status: "On going" }
-      : new Date(item?.date) < today
-      ? { ...item, status: "Passed" }
-      : { ...item, status: "Upcoming" }
-  );
-
-  // cancel booking
-  const [cancelBooking] = useCancelBookingMutation();
-  const handleCancelBooking = async (id: string) => {
-    toast.loading("Canceling...", { id: "cancel" });
+  // edit facility
+  const [updateFacility] = useUpdateFacilityMutation();
+  const handleUpdateFacility = async (id: string) => {
+    toast.loading("Updating...", { id: "update" });
     try {
-      const res = await cancelBooking(id).unwrap();
+      const res = await updateFacility(id).unwrap();
       if (res.success) {
-        toast.success("Successfully Deleted", { id: "cancel" });
+        toast.success("Successfully Edited", { id: "update" });
       }
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
-      toast.error(error?.data?.message, { id: "cancel" });
+      toast.error(error?.data?.message, { id: "update" });
+      console.log(error);
+    }
+  };
+
+  // delete facility
+  const [deleteFacility] = useDeleteFacilityMutation();
+  const handleDeleteFacility = async (id: string) => {
+    toast.loading("Deleting...", { id: "delete" });
+    try {
+      console.log(id);
+      //   const res = await deleteFacility(id).unwrap();
+      //   if (res.success) {
+      //     toast.success("Successfully Deleted", { id: "delete" });
+      //   }
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
+      toast.error(error?.data?.message, { id: "delete" });
       console.log(error);
     }
   };
@@ -78,25 +78,23 @@ const UserBookings = () => {
       <main className="grid flex-1 items-start gap-4 sm:py-0 md:gap-8">
         <Card className="grid flex-1 h-full shadow-none">
           <CardHeader>
-            <CardTitle className="text-2xl font-bold">My Bookings</CardTitle>
+            <CardTitle className="text-2xl font-bold">Facilities</CardTitle>
             <CardDescription>
-              Manage your bookings and view their time slots.
+              Manage your facilities and view their features.
             </CardDescription>
           </CardHeader>
           <CardContent>
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead className="hidden w-[100px] md:table-cell">
-                    <span className="sr-only">Image</span>
+                  <TableHead className="w-[100px] table-cell">
+                    <span className="md:sr-only">Image</span>
                   </TableHead>
                   <TableHead>Name</TableHead>
-                  <TableHead>Status</TableHead>
+                  <TableHead className="hidden md:table-cell">Price</TableHead>
                   <TableHead className="hidden md:table-cell">
                     Location
                   </TableHead>
-                  <TableHead className="hidden md:table-cell">Date</TableHead>
-                  <TableHead className="hidden md:table-cell">Time</TableHead>
                   <TableHead>
                     <span className="sr-only">Actions</span>
                   </TableHead>
@@ -131,47 +129,35 @@ const UserBookings = () => {
                       </TableRow>
                     ))
                   : // display date when fetching completed
-                    bookings?.map((item: TBooking, index: number) => (
+                    facilities?.map((item: TFacility, index: number) => (
                       <TableRow key={index}>
-                        <TableCell className="hidden md:table-cell">
-                          <Link to={`/facilities/${item?.facility?._id}`}>
+                        <TableCell className="table-cell">
+                          <Link to={`/facilities/${item?._id}`}>
                             <img
                               alt="Product image"
                               className="aspect-square rounded-md object-cover"
                               height="64"
-                              src={item?.facility?.image}
+                              src={item?.image}
                               width="64"
                             />
                           </Link>
                         </TableCell>
                         <TableCell className="font-medium">
                           <Link
-                            to={`/facilities/${item?.facility?._id}`}
+                            to={`/facilities/${item?._id}`}
                             className="hover:text-primary"
                           >
-                            {item?.facility?.name}
+                            {item?.name}
                           </Link>
                         </TableCell>
-                        <TableCell>
-                          <Badge
-                            variant="outline"
-                            className={`${
-                              item?.isBooked === "canceled" && "text-red-500"
-                            }`}
-                          >
-                            {capitalizeFirstLetter(item?.isBooked)}
-                          </Badge>
+                        <TableCell className="hidden md:table-cell">
+                          $ {roundNumber(item?.pricePerHour)} / hour
                         </TableCell>
                         <TableCell className="hidden md:table-cell">
-                          {item?.facility?.location}
-                        </TableCell>
-                        <TableCell className="hidden md:table-cell">
-                          {item?.date}
-                        </TableCell>
-                        <TableCell className="hidden md:table-cell">
-                          {item?.startTime} - {item?.startTime}
+                          {item?.location}
                         </TableCell>
                         <TableCell>
+                          {/* data action */}
                           <DropdownMenu>
                             <DropdownMenuTrigger asChild>
                               <Button
@@ -188,14 +174,12 @@ const UserBookings = () => {
                               className="space-y-1"
                             >
                               <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                              {/* view details button */}
-                              <DetailsDialog booking={item} />
-                              {/* cancel button */}
+                              <DropdownMenuItem>Edit</DropdownMenuItem>
                               <DropdownMenuItem
-                                onClick={() => handleCancelBooking(item?._id)}
-                                className="cursor-pointer text-red-500"
+                                onClick={() => handleDeleteFacility(item?._id)}
+                                className="text-red-500"
                               >
-                                Cancel
+                                Delete
                               </DropdownMenuItem>
                             </DropdownMenuContent>
                           </DropdownMenu>
@@ -203,18 +187,18 @@ const UserBookings = () => {
                       </TableRow>
                     ))}
               </TableBody>
-              {bookings?.length < 1 && (
+              {facilities?.length < 1 && (
                 <TableCaption>
-                  {/* show no data found message if bookings is empty */}
+                  {/* show no data found message if facilities is empty */}
                   <div className="text-center w-full mt-14">
                     <h3 className="text-2xl font-bold tracking-tight">
-                      You have no bookings
+                      You have no facilities
                     </h3>
                     <p className="text-sm text-muted-foreground">
-                      You can start enjoying as soon as you book a facility.
+                      You can start selling as soon as you add a facility.
                     </p>
                     <Link to={"/facilities"}>
-                      <Button className="mt-4">Book Now</Button>
+                      <Button className="mt-4">Add Now</Button>
                     </Link>
                   </div>
                 </TableCaption>
@@ -222,11 +206,11 @@ const UserBookings = () => {
             </Table>
           </CardContent>
           {/* showing range of pagination */}
-          {bookings?.length > 0 && (
+          {facilities?.length > 0 && (
             <CardFooter>
               <div className="text-xs text-muted-foreground">
-                Showing <strong>1-{bookings?.length}</strong> of{" "}
-                <strong>{bookings?.length}</strong> bookings
+                Showing <strong>1-{facilities?.length}</strong> of{" "}
+                <strong>{facilities?.length}</strong> facilities
               </div>
             </CardFooter>
           )}
@@ -236,4 +220,4 @@ const UserBookings = () => {
   );
 };
 
-export default UserBookings;
+export default AdminFacilities;

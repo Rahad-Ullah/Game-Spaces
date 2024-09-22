@@ -2,6 +2,7 @@ import DashboardLayout from "@/components/layout/DashboardLayout";
 import MainLayout from "@/components/layout/MainLayout";
 import Booking from "@/pages/Booking/Booking";
 import AdminBookings from "@/pages/Dashboard/Admin/Bookings/AdminBookings";
+import AdminFacilities from "@/pages/Dashboard/Admin/Facilities/Facilities";
 import Dashboard from "@/pages/Dashboard/Shared/Dashboard";
 import UserBookings from "@/pages/Dashboard/User/Bookings/UserBookings";
 import ErrorPage from "@/pages/Error/ErrorPage";
@@ -72,7 +73,7 @@ const router = createBrowserRouter([
       },
       {
         path: "facilities",
-        element: <AdminBookings />,
+        element: <AdminFacilities />,
       },
       {
         path: "admins",

@@ -36,9 +36,7 @@ import { roundNumber } from "@/utils/roundNumber";
 const AdminBookings = () => {
   // get bookings data
   const { data, isFetching } = useGetAllBookingsQuery(undefined);
-
   const bookings = data?.data;
-  console.log(bookings);
 
   return (
     <div className="flex flex-1 flex-col gap-4 lg:gap-6">
