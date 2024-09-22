@@ -1,8 +1,9 @@
 import DashboardLayout from "@/components/layout/DashboardLayout";
 import MainLayout from "@/components/layout/MainLayout";
 import Booking from "@/pages/Booking/Booking";
-import Bookings from "@/pages/Dashboard/Shared/Bookings/Bookings";
+import AdminBookings from "@/pages/Dashboard/Admin/Bookings/AdminBookings";
 import Dashboard from "@/pages/Dashboard/Shared/Dashboard";
+import UserBookings from "@/pages/Dashboard/User/Bookings/UserBookings";
 import ErrorPage from "@/pages/Error/ErrorPage";
 import Facilities from "@/pages/Facilities/Facilities";
 import FacilityDetails from "@/pages/FacilityDetails/FacilityDetails";
@@ -62,16 +63,20 @@ const router = createBrowserRouter([
         element: <Dashboard />,
       },
       {
+        path: "my-bookings",
+        element: <UserBookings />,
+      },
+      {
         path: "bookings",
-        element: <Bookings />,
+        element: <AdminBookings />,
       },
       {
         path: "facilities",
-        element: <Bookings />,
+        element: <AdminBookings />,
       },
       {
         path: "admins",
-        element: <Bookings />,
+        element: <AdminBookings />,
       },
     ],
   },

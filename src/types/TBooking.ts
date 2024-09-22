@@ -1,8 +1,9 @@
+import { TUser } from "./TAuth";
 import { TFacility } from "./TFacility";
 
 export type TBooking = {
   _id: string;
-  user: string;
+  user: TUser;
   date: string;
   facility: TFacility;
   startTime: string;

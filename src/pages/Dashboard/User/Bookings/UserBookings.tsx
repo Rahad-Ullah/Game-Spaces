@@ -39,7 +39,7 @@ import { toast } from "sonner";
 import DetailsDialog from "./DetailsDialog";
 import { Link } from "react-router-dom";
 
-const Bookings = () => {
+const UserBookings = () => {
   // get current user
   const user = useAppSelector(selectCurrentUser);
 
@@ -56,6 +56,7 @@ const Bookings = () => {
       ? { ...item, status: "Passed" }
       : { ...item, status: "Upcoming" }
   );
+  console.log(data);
 
   // cancel booking
   const [cancelBooking] = useCancelBookingMutation();
@@ -134,16 +135,23 @@ const Bookings = () => {
                     bookings?.map((item: TBooking, index: number) => (
                       <TableRow key={index}>
                         <TableCell className="hidden md:table-cell">
-                          <img
-                            alt="Product image"
-                            className="aspect-square rounded-md object-cover"
-                            height="64"
-                            src={item?.facility?.image}
-                            width="64"
-                          />
+                          <Link to={`/facilities/${item?.facility?._id}`}>
+                            <img
+                              alt="Product image"
+                              className="aspect-square rounded-md object-cover"
+                              height="64"
+                              src={item?.facility?.image}
+                              width="64"
+                            />
+                          </Link>
                         </TableCell>
                         <TableCell className="font-medium">
-                          {item?.facility?.name}
+                          <Link
+                            to={`/facilities/${item?.facility?._id}`}
+                            className="hover:text-primary"
+                          >
+                            {item?.facility?.name}
+                          </Link>
                         </TableCell>
                         <TableCell>
                           <Badge
@@ -229,4 +237,4 @@ const Bookings = () => {
   );
 };
 
-export default Bookings;
+export default UserBookings;

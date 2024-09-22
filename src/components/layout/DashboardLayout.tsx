@@ -74,21 +74,36 @@ const DashboardLayout = () => {
                   <Home className="size-5" />
                   Dashboard
                 </NavLink>
-                <NavLink
-                  to="/dashboard/bookings"
-                  className={({ isActive, isPending }) =>
-                    isPending
-                      ? "pending"
-                      : isActive
-                      ? "flex items-center gap-3 rounded-lg px-3 py-2 bg-muted text-primary transition-all hover:text-primary"
-                      : "flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
-                  }
-                >
-                  <Ticket className="size-5" />
-                  {auth?.user?.role === "admin" ? "Bookings" : "My Bookings"}
-                </NavLink>
+                {user?.role === "user" && (
+                  <NavLink
+                    to="/dashboard/my-bookings"
+                    className={({ isActive, isPending }) =>
+                      isPending
+                        ? "pending"
+                        : isActive
+                        ? "flex items-center gap-3 rounded-lg px-3 py-2 bg-muted text-primary transition-all hover:text-primary"
+                        : "flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
+                    }
+                  >
+                    <Ticket className="size-5" />
+                    My Bookings
+                  </NavLink>
+                )}
                 {user?.role === "admin" && (
                   <div className="flex flex-col gap-2">
+                    <NavLink
+                      to="/dashboard/bookings"
+                      className={({ isActive, isPending }) =>
+                        isPending
+                          ? "pending"
+                          : isActive
+                          ? "flex items-center gap-3 rounded-lg px-3 py-2 bg-muted text-primary transition-all hover:text-primary"
+                          : "flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
+                      }
+                    >
+                      <Ticket className="size-5" />
+                      Bookings{" "}
+                    </NavLink>
                     <NavLink
                       to="/dashboard/facilities"
                       className={({ isActive, isPending }) =>
@@ -140,7 +155,7 @@ const DashboardLayout = () => {
 
         {/* main ui */}
         <div className="flex flex-col w-full gap-6 p-4 pt-0">
-          <header className="flex h-14 items-center gap-4 lg:h-[75px] shadow-sm sticky top-0 z-20 bg-white">
+          <header className="flex h-14 items-center gap-4 lg:h-[75px] xl:shadow-sm sticky top-0 z-20 bg-white">
             {/* sidebar toggle menu icon for small screen */}
             <Sheet>
               <SheetTrigger asChild>
@@ -177,21 +192,36 @@ const DashboardLayout = () => {
                     <Home className="size-5" />
                     Dashboard
                   </NavLink>
-                  <NavLink
-                    to="/dashboard/bookings"
-                    className={({ isActive, isPending }) =>
-                      isPending
-                        ? "pending"
-                        : isActive
-                        ? "flex items-center gap-3 rounded-lg px-3 py-2 bg-muted text-primary transition-all hover:text-primary"
-                        : "flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
-                    }
-                  >
-                    <Ticket className="size-5" />
-                    {auth?.user?.role === "admin" ? "Bookings" : "My Bookings"}
-                  </NavLink>
+                  {user?.role === "user" && (
+                    <NavLink
+                      to="/dashboard/my-bookings"
+                      className={({ isActive, isPending }) =>
+                        isPending
+                          ? "pending"
+                          : isActive
+                          ? "flex items-center gap-3 rounded-lg px-3 py-2 bg-muted text-primary transition-all hover:text-primary"
+                          : "flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
+                      }
+                    >
+                      <Ticket className="size-5" />
+                      My Bookings
+                    </NavLink>
+                  )}
                   {user?.role === "admin" && (
                     <div className="flex flex-col gap-2">
+                      <NavLink
+                        to="/dashboard/bookings"
+                        className={({ isActive, isPending }) =>
+                          isPending
+                            ? "pending"
+                            : isActive
+                            ? "flex items-center gap-3 rounded-lg px-3 py-2 bg-muted text-primary transition-all hover:text-primary"
+                            : "flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
+                        }
+                      >
+                        <Ticket className="size-5" />
+                        Bookings{" "}
+                      </NavLink>
                       <NavLink
                         to="/dashboard/facilities"
                         className={({ isActive, isPending }) =>

@@ -82,7 +82,7 @@ const DetailsDialog = ({ booking }: { booking: TBooking }) => {
             </Table>
           </ScrollArea>
           <div className="flex justify-center pt-3">
-            <DialogClose className="bg-muted p-2 px-4 rounded-lg hover:bg-primary-foreground">
+            <DialogClose className="text-sm bg-muted p-2 px-4 rounded-lg hover:bg-primary-foreground">
               Close
             </DialogClose>
           </div>
