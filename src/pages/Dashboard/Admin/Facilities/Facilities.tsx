@@ -34,27 +34,12 @@ import {
 } from "@/redux/features/facility/facilityApi";
 import { TFacility } from "@/types/TFacility";
 import { toast } from "sonner";
+import UpdateFacilityModal from "./UpdateFacilityModal";
 
 const AdminFacilities = () => {
   // get facilities data
   const { data, isFetching } = useGetAllFacilitiesQuery(undefined);
   const facilities = data?.data;
-
-  // edit facility
-  const [updateFacility] = useUpdateFacilityMutation();
-  const handleUpdateFacility = async (id: string) => {
-    toast.loading("Updating...", { id: "update" });
-    try {
-      const res = await updateFacility(id).unwrap();
-      if (res.success) {
-        toast.success("Successfully Edited", { id: "update" });
-      }
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    } catch (error: any) {
-      toast.error(error?.data?.message, { id: "update" });
-      console.log(error);
-    }
-  };
 
   // delete facility
   const [deleteFacility] = useDeleteFacilityMutation();
@@ -174,10 +159,11 @@ const AdminFacilities = () => {
                               className="space-y-1"
                             >
                               <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                              <DropdownMenuItem>Edit</DropdownMenuItem>
+                              {/* edit button */}
+                              <UpdateFacilityModal facility={item} />
                               <DropdownMenuItem
                                 onClick={() => handleDeleteFacility(item?._id)}
-                                className="text-red-500"
+                                className="text-red-500 cursor-pointer"
                               >
                                 Delete
                               </DropdownMenuItem>

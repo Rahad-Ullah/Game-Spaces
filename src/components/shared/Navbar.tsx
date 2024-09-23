@@ -190,14 +190,16 @@ const Navbar = () => {
               </p>
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>
-              <Link to={"/dashboard/index"}>Dashboard</Link>
-            </DropdownMenuItem>
+            <Link to={"/dashboard/index"}>
+              <DropdownMenuItem className="cursor-pointer">
+                Dashboard
+              </DropdownMenuItem>
+            </Link>
             <DropdownMenuItem>Settings</DropdownMenuItem>
             <DropdownMenuSeparator />
             <DropdownMenuItem
               onClick={() => dispatch(logOut())}
-              className="text-destructive"
+              className="text-destructive cursor-pointer"
             >
               Logout
             </DropdownMenuItem>
