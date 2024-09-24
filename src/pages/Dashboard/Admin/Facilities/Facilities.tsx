@@ -9,8 +9,10 @@ import {
 } from "@/components/ui/card";
 import {
   DropdownMenu,
+  DropdownMenuCheckboxItem,
   DropdownMenuContent,
   DropdownMenuLabel,
+  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -23,7 +25,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { MoreHorizontal } from "lucide-react";
+import { File, ListFilter, MoreHorizontal, PlusCircle } from "lucide-react";
 import { Link } from "react-router-dom";
 import { roundNumber } from "@/utils/roundNumber";
 import { useGetAllFacilitiesQuery } from "@/redux/features/facility/facilityApi";
@@ -38,7 +40,46 @@ const AdminFacilities = () => {
 
   return (
     <div className="flex flex-1 flex-col gap-4 lg:gap-6">
-      <main className="grid flex-1 items-start gap-4 sm:py-0 md:gap-8">
+      <main className="grid flex-1 items-start gap-4 sm:py-0 md:gap-6">
+        {/* add product button */}
+        <div className="flex items-center">
+          <div className="ml-auto flex items-center gap-2">
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="outline" className="gap-1">
+                  <ListFilter className="h-3.5 w-3.5" />
+                  <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
+                    Filter
+                  </span>
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <DropdownMenuLabel>Filter by</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuCheckboxItem checked>
+                  Active
+                </DropdownMenuCheckboxItem>
+                <DropdownMenuCheckboxItem>Draft</DropdownMenuCheckboxItem>
+                <DropdownMenuCheckboxItem>Archived</DropdownMenuCheckboxItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+            <Button variant="outline" className="gap-1">
+              <File className="h-3.5 w-3.5" />
+              <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
+                Export
+              </span>
+            </Button>
+            <Link to={"/dashboard/add-facility"}>
+              <Button className="gap-1">
+                <PlusCircle className="h-3.5 w-3.5 md:size-4" />
+                <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
+                  Add Facility
+                </span>
+              </Button>
+            </Link>
+          </div>
+        </div>
+        {/* facilities table */}
         <Card className="grid flex-1 h-full shadow-none">
           <CardHeader>
             <CardTitle className="text-2xl font-bold">Facilities</CardTitle>

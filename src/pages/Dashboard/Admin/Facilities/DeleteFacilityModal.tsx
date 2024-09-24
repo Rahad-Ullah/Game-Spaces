@@ -18,7 +18,6 @@ const DeleteFacilityModal = ({ facilityId }: { facilityId: string }) => {
   const handleDeleteFacility = async (id: string) => {
     toast.loading("Deleting...", { id: "delete" });
     try {
-      console.log(id);
       const res = await deleteFacility(id).unwrap();
       if (res.success) {
         toast.success("Successfully Deleted", { id: "delete" });

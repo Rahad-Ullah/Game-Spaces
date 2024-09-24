@@ -4,12 +4,26 @@
 
 html {
   scroll-behavior: smooth;
+  border-radius: 30px;
 }
 
 body {
   font-family: "Poppins", sans-serif;
   font-family: "Nunito", sans-serif;
   /* font-family: "Lato", sans-serif; */
+}
+
+*::-webkit-scrollbar {
+  width: 10px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #7c3aed38;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #7C3AED;
+  border-radius: 14px;
 }
 
 
