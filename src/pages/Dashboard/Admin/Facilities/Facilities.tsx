@@ -10,7 +10,6 @@ import {
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
@@ -27,36 +26,15 @@ import {
 import { MoreHorizontal } from "lucide-react";
 import { Link } from "react-router-dom";
 import { roundNumber } from "@/utils/roundNumber";
-import {
-  useDeleteFacilityMutation,
-  useGetAllFacilitiesQuery,
-  useUpdateFacilityMutation,
-} from "@/redux/features/facility/facilityApi";
+import { useGetAllFacilitiesQuery } from "@/redux/features/facility/facilityApi";
 import { TFacility } from "@/types/TFacility";
-import { toast } from "sonner";
 import UpdateFacilityModal from "./UpdateFacilityModal";
+import DeleteFacilityModal from "./DeleteFacilityModal";
 
 const AdminFacilities = () => {
   // get facilities data
   const { data, isFetching } = useGetAllFacilitiesQuery(undefined);
   const facilities = data?.data;
-
-  // delete facility
-  const [deleteFacility] = useDeleteFacilityMutation();
-  const handleDeleteFacility = async (id: string) => {
-    toast.loading("Deleting...", { id: "delete" });
-    try {
-      console.log(id);
-      //   const res = await deleteFacility(id).unwrap();
-      //   if (res.success) {
-      //     toast.success("Successfully Deleted", { id: "delete" });
-      //   }
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    } catch (error: any) {
-      toast.error(error?.data?.message, { id: "delete" });
-      console.log(error);
-    }
-  };
 
   return (
     <div className="flex flex-1 flex-col gap-4 lg:gap-6">
@@ -161,12 +139,7 @@ const AdminFacilities = () => {
                               <DropdownMenuLabel>Actions</DropdownMenuLabel>
                               {/* edit button */}
                               <UpdateFacilityModal facility={item} />
-                              <DropdownMenuItem
-                                onClick={() => handleDeleteFacility(item?._id)}
-                                className="text-red-500 cursor-pointer"
-                              >
-                                Delete
-                              </DropdownMenuItem>
+                              <DeleteFacilityModal facilityId={item?._id} />
                             </DropdownMenuContent>
                           </DropdownMenu>
                         </TableCell>
