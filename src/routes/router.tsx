@@ -1,6 +1,7 @@
 import DashboardLayout from "@/components/layout/DashboardLayout";
 import MainLayout from "@/components/layout/MainLayout";
 import Booking from "@/pages/Booking/Booking";
+import AddAdmin from "@/pages/Dashboard/Admin/Admins/AddAdmin";
 import AdminBookings from "@/pages/Dashboard/Admin/Bookings/AdminBookings";
 import AddFacility from "@/pages/Dashboard/Admin/Facilities/AddFacility";
 import AdminFacilities from "@/pages/Dashboard/Admin/Facilities/Facilities";
@@ -81,8 +82,8 @@ const router = createBrowserRouter([
         element: <AddFacility />,
       },
       {
-        path: "admins",
-        element: <AdminBookings />,
+        path: "add-admin",
+        element: <AddAdmin />,
       },
     ],
   },

@@ -118,7 +118,7 @@ const DashboardLayout = () => {
                       Facilities{" "}
                     </NavLink>
                     <NavLink
-                      to="/dashboard/admins"
+                      to="/dashboard/add-admin"
                       className={({ isActive, isPending }) =>
                         isPending
                           ? "pending"
@@ -128,7 +128,7 @@ const DashboardLayout = () => {
                       }
                     >
                       <Users className="size-5" />
-                      Admins
+                      Add Admin
                     </NavLink>
                   </div>
                 )}
@@ -236,7 +236,7 @@ const DashboardLayout = () => {
                         Facilities{" "}
                       </NavLink>
                       <NavLink
-                        to="/dashboard/admins"
+                        to="/dashboard/add-admin"
                         className={({ isActive, isPending }) =>
                           isPending
                             ? "pending"
@@ -246,7 +246,7 @@ const DashboardLayout = () => {
                         }
                       >
                         <Users className="size-5" />
-                        Admins
+                        Add Admin
                       </NavLink>
                     </div>
                   )}
