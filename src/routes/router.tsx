@@ -1,6 +1,7 @@
 import DashboardLayout from "@/components/layout/DashboardLayout";
 import MainLayout from "@/components/layout/MainLayout";
 import Booking from "@/pages/Booking/Booking";
+import ContactUs from "@/pages/ContactUs/ContactUs";
 import AddAdmin from "@/pages/Dashboard/Admin/Admins/AddAdmin";
 import AdminBookings from "@/pages/Dashboard/Admin/Bookings/AdminBookings";
 import AddFacility from "@/pages/Dashboard/Admin/Facilities/AddFacility";
@@ -46,6 +47,10 @@ const router = createBrowserRouter([
       {
         path: "/payment/fail/:id",
         element: <PaymentFail />,
+      },
+      {
+        path: "/contact",
+        element: <ContactUs />,
       },
       {
         path: "/sign-up",
