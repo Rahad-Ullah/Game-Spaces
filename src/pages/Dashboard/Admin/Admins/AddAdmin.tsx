@@ -57,7 +57,7 @@ const AddAdmin = () => {
 
   // define submit handler
   async function onSubmit(values: z.infer<typeof formValidationSchema>) {
-    toast.loading("Creating...", { id: "add-admin" });
+    toast.loading("Adding...", { id: "add-admin" });
     try {
       const res = await addAdmin({
         ...values,
@@ -65,8 +65,10 @@ const AddAdmin = () => {
       });
       console.log(res);
       if (res?.data?.success) {
-        toast.success("Successfully Created", { id: "add-admin" });
+        toast.success("Successfully Added", { id: "add-admin" });
         form.reset();
+      } else if (res?.error) {
+        toast.error("User already exist", { id: "add-admin" });
       } else {
         toast.error("Something went wrong", { id: "add-admin" });
       }

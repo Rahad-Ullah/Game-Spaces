@@ -14,7 +14,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import Container from "@/components/shared/Container";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { useSignUpMutation } from "@/redux/features/auth/authApi";
 
@@ -39,6 +39,7 @@ const formValidationSchema = z.object({
 
 const SignUp = () => {
   const [signUp] = useSignUpMutation();
+  const navigate = useNavigate();
 
   // define form
   const form = useForm<z.infer<typeof formValidationSchema>>({
@@ -71,6 +72,7 @@ const SignUp = () => {
       if (res.success) {
         toast.success("Sign up successful", { id: "sign-up" });
         form.reset();
+        navigate("/login");
       }
     } catch (error: any) {
       toast.error(error?.data?.message, { id: "sign-up" });
