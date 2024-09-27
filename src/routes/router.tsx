@@ -1,5 +1,6 @@
 import DashboardLayout from "@/components/layout/DashboardLayout";
 import MainLayout from "@/components/layout/MainLayout";
+import AboutUs from "@/pages/AboutUs/AboutUs";
 import Booking from "@/pages/Booking/Booking";
 import ContactUs from "@/pages/ContactUs/ContactUs";
 import AddAdmin from "@/pages/Dashboard/Admin/Admins/AddAdmin";
@@ -51,6 +52,10 @@ const router = createBrowserRouter([
       {
         path: "/contact",
         element: <ContactUs />,
+      },
+      {
+        path: "/about-us",
+        element: <AboutUs />,
       },
       {
         path: "/sign-up",
