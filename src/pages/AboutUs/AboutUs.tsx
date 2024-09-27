@@ -2,6 +2,7 @@ import Container from "@/components/shared/Container";
 import MissionSection from "./MissionSection";
 import OurTeamSection from "./OurTeamSection";
 import HistorySection from "./HistorySection";
+import ContactSection from "./ContactSection";
 
 const AboutUs = () => {
   return (
@@ -50,6 +51,8 @@ const AboutUs = () => {
         <OurTeamSection />
         {/* history and achievement section */}
         <HistorySection />
+        {/* contact section */}
+        <ContactSection />
       </Container>
     </div>
   );
