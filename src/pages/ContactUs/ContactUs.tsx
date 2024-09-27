@@ -80,35 +80,17 @@ const ContactUs = () => {
   return (
     <div className="py-8 md:py-12">
       <Container>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20">
-          {/* google map */}
-          <div className="min-h-80">
-            {/* <img
+        {/* form section */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-20">
+          {/* background image */}
+          <div className="">
+            <img
               src="https://c4.wallpaperflare.com/wallpaper/971/967/737/sports-images-for-desktop-background-wallpaper-preview.jpg"
               alt="sport image"
-              className="rounded-2xl h-full object-cover"
-            /> */}
-            <APIProvider
-              apiKey={import.meta.env.VITE_GOOGLE_MAP_API_KEY as string}
-              onLoad={() => console.log("Maps API has loaded.")}
-            >
-              <Map
-                mapId="DEMO_MAP_ID"
-                defaultZoom={13}
-                defaultCenter={{ lat: 40.712776, lng: -74.005974 }}
-                onCameraChanged={(ev: MapCameraChangedEvent) =>
-                  console.log(
-                    "camera changed:",
-                    ev.detail.center,
-                    "zoom:",
-                    ev.detail.zoom
-                  )
-                }
-              >
-                <PoiMarkers pois={locations} />
-              </Map>
-            </APIProvider>
+              className="rounded-lg h-full object-cover"
+            />
           </div>
+          {/* contact form */}
           <div>
             <div className="space-y-2 mb-6">
               <h1 className="text-2xl md:text-3xl font-extrabold">
@@ -197,6 +179,7 @@ const ContactUs = () => {
             </Form>
           </div>
         </div>
+        {/* contact information section */}
         <div className="pt-14 md:pt-20 grid gap-10">
           <div className="font-medium space-y-3">
             <span className="text-sm font-semibold border rounded-full px-3 py-1">
@@ -239,6 +222,47 @@ const ContactUs = () => {
               <p className="text-sm">Available during working hours.</p>
               <p className="mt-3 text-primary font-bold">(+1)234-4567-789</p>
             </div>
+          </div>
+        </div>
+        {/* map section */}
+        <div className="grid md:grid-cols-2 gap-y-10 lg:gap-20 py-12">
+          <div className="flex flex-col justify-center">
+            <div className="space-y-4">
+              <span className="text-sm font-semibold border rounded-full px-3 py-1">
+                Visit Our Office
+              </span>
+              <h1 className="text-2xl md:text-3xl font-extrabold pt-2">
+                Our Location
+              </h1>
+              <div className="space-y-2">
+                <p className="font-medium">22/c Elementary Avenue</p>
+                <p className="font-medium">
+                  New York City, United States of America
+                </p>
+              </div>
+            </div>
+          </div>
+          <div className="min-h-96">
+            <APIProvider
+              apiKey={import.meta.env.VITE_GOOGLE_MAP_API_KEY as string}
+              onLoad={() => console.log("Maps API has loaded.")}
+            >
+              <Map
+                mapId="DEMO_MAP_ID"
+                defaultZoom={13}
+                defaultCenter={{ lat: 40.712776, lng: -74.005974 }}
+                onCameraChanged={(ev: MapCameraChangedEvent) =>
+                  console.log(
+                    "camera changed:",
+                    ev.detail.center,
+                    "zoom:",
+                    ev.detail.zoom
+                  )
+                }
+              >
+                <PoiMarkers pois={locations} />
+              </Map>
+            </APIProvider>
           </div>
         </div>
       </Container>
