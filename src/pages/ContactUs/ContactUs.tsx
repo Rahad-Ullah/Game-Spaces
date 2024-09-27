@@ -57,7 +57,7 @@ const ContactUs = () => {
 
   // define submit handler
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  async function onSubmit(values: z.infer<typeof formValidationSchema>) {
+  async function onSubmit(_values: z.infer<typeof formValidationSchema>) {
     // toast.loading("Adding...", { id: "add-admin" });
     // try {
     //     const res = await
