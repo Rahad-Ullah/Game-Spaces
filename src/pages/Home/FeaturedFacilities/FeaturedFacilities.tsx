@@ -6,7 +6,6 @@ import FacilityCard from "./FacilityCard";
 const FeaturedFacilities = () => {
   const { data } = useGetAllFacilitiesQuery(undefined);
   const facilities = data?.data?.slice(11, 14);
-  console.log(facilities);
 
   return (
     <div className="py-16 lg:py-24 bg-slate-50">

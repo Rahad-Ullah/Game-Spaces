@@ -1,6 +1,7 @@
 import BannerSection from "./BannerSection";
 import FeaturedFacilities from "./FeaturedFacilities/FeaturedFacilities";
 import HowItWorksSection from "./HowItWorks/HowItWorksSection";
+import Testimonial from "./Testimonial/Testimonial";
 
 const Home = () => {
   return (
@@ -11,6 +12,8 @@ const Home = () => {
       <FeaturedFacilities />
       {/* How it works */}
       <HowItWorksSection />
+      {/* Testimonial */}
+      <Testimonial />
     </div>
   );
 };
