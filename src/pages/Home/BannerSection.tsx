@@ -5,13 +5,13 @@ import { MousePointer } from "lucide-react";
 
 const BannerSection = () => {
   return (
-    <div className="py-4">
+    <div className="py-8 pb-10">
       <Container>
         <div className="flex flex-col md:flex-row-reverse justify-between items-center gap-8">
           <div className="md:w-5/12">
             <img src={banner_img} alt="banner image" className="w-full" />
           </div>
-          <div className="flex-1">
+          <div className="flex-1 text-center md:text-left">
             <h1 className="text-4xl lg:text-6xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-primary to-fuchsia-500">
               Unlock Your Game
             </h1>
