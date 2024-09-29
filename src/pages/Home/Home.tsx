@@ -1,6 +1,7 @@
 import BannerSection from "./BannerSection";
 import FeaturedFacilities from "./FeaturedFacilities/FeaturedFacilities";
 import HowItWorksSection from "./HowItWorks/HowItWorksSection";
+import PartnersSection from "./PartnersSection/PartnersSection";
 import Testimonial from "./Testimonial/Testimonial";
 
 const Home = () => {
@@ -14,6 +15,8 @@ const Home = () => {
       <HowItWorksSection />
       {/* Testimonial */}
       <Testimonial />
+      {/* Our Partners */}
+      <PartnersSection />
     </div>
   );
 };
