@@ -22,8 +22,12 @@ body {
 }
 
 *::-webkit-scrollbar-thumb {
-  background-color: #7C3AED;
+  background-color: #7c3aed5c;
   border-radius: 14px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background-color: #7C3AED;
 }
 
 

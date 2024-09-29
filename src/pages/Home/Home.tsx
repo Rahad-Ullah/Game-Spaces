@@ -1,5 +1,6 @@
 import BannerSection from "./BannerSection";
-import FeaturedFacilities from "./FeaturedFacilities";
+import FeaturedFacilities from "./FeaturedFacilities/FeaturedFacilities";
+import HowItWorksSection from "./HowItWorks/HowItWorksSection";
 
 const Home = () => {
   return (
@@ -8,6 +9,8 @@ const Home = () => {
       <BannerSection />
       {/* featured facilities */}
       <FeaturedFacilities />
+      {/* How it works */}
+      <HowItWorksSection />
     </div>
   );
 };

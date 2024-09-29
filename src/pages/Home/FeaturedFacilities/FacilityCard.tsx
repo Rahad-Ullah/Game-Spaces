@@ -32,7 +32,7 @@ const FacilityCard = ({ facility }: { facility: TFacility }) => {
       </CardContent>
       <CardFooter>
         <Link to={`/facilities/${_id}`} className="w-full">
-          <Button variant={'secondary'} className="w-full text-base">View Details</Button>
+          <Button variant={'default'} className="w-full text-base h-12">View Details</Button>
         </Link>
       </CardFooter>
     </Card>

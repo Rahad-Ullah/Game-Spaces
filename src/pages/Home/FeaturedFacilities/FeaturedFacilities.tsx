@@ -17,7 +17,7 @@ const FeaturedFacilities = () => {
             Featured Facilities
           </h1>
           <p className="text-slate-600 text-lg md:text-xl font-medium text-center">
-          Elevate your game in our cutting-edge facilities.
+            Elevate your game in our cutting-edge facilities.
           </p>
           {/* facilities container */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-12">
