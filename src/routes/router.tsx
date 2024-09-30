@@ -9,7 +9,6 @@ import AddFacility from "@/pages/Dashboard/Admin/Facilities/AddFacility";
 import AdminFacilities from "@/pages/Dashboard/Admin/Facilities/Facilities";
 import Dashboard from "@/pages/Dashboard/Shared/Dashboard";
 import UserBookings from "@/pages/Dashboard/User/Bookings/UserBookings";
-import ErrorPage from "@/pages/Error/ErrorPage";
 import Facilities from "@/pages/Facilities/Facilities";
 import FacilityDetails from "@/pages/FacilityDetails/FacilityDetails";
 import Home from "@/pages/Home/Home";
@@ -18,12 +17,16 @@ import PaymentFail from "@/pages/Payment/PaymentFail";
 import PaymentSuccess from "@/pages/Payment/PaymentSuccess";
 import SignUp from "@/pages/SignUp/SignUp";
 import { createBrowserRouter } from "react-router-dom";
+import Error404Page from "@/pages/Error/Error404Page";
+import UnauthorizedAccess from "@/pages/Error/UnauthorizedAccess";
+import ProtectedRoutes from "./ProtectedRoutes";
+import PrivateRoutes from "./PrivateRoutes";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout />,
-    errorElement: <ErrorPage />,
+    errorElement: <Error404Page />,
     children: [
       {
         index: true,
@@ -39,15 +42,27 @@ const router = createBrowserRouter([
       },
       {
         path: "/booking/:id",
-        element: <Booking />,
+        element: (
+          <ProtectedRoutes role="user">
+            <Booking />
+          </ProtectedRoutes>
+        ),
       },
       {
         path: "/payment/success/:id",
-        element: <PaymentSuccess />,
+        element: (
+          <ProtectedRoutes role="user">
+            <PaymentSuccess />
+          </ProtectedRoutes>
+        ),
       },
       {
         path: "/payment/fail/:id",
-        element: <PaymentFail />,
+        element: (
+          <ProtectedRoutes role="user">
+            <PaymentFail />
+          </ProtectedRoutes>
+        ),
       },
       {
         path: "/contact",
@@ -65,11 +80,19 @@ const router = createBrowserRouter([
         path: "/login",
         element: <Login />,
       },
+      {
+        path: "/unauthorized-access",
+        element: <UnauthorizedAccess />,
+      },
     ],
   },
   {
     path: "/dashboard",
-    element: <DashboardLayout />,
+    element: (
+      <PrivateRoutes>
+        <DashboardLayout />
+      </PrivateRoutes>
+    ),
     children: [
       {
         path: "index",
@@ -77,23 +100,43 @@ const router = createBrowserRouter([
       },
       {
         path: "my-bookings",
-        element: <UserBookings />,
+        element: (
+          <ProtectedRoutes role="user">
+            <UserBookings />
+          </ProtectedRoutes>
+        ),
       },
       {
         path: "bookings",
-        element: <AdminBookings />,
+        element: (
+          <ProtectedRoutes role="admin">
+            <AdminBookings />
+          </ProtectedRoutes>
+        ),
       },
       {
         path: "facilities",
-        element: <AdminFacilities />,
+        element: (
+          <ProtectedRoutes role="admin">
+            <AdminFacilities />
+          </ProtectedRoutes>
+        ),
       },
       {
         path: "add-facility",
-        element: <AddFacility />,
+        element: (
+          <ProtectedRoutes role="admin">
+            <AddFacility />
+          </ProtectedRoutes>
+        ),
       },
       {
         path: "add-admin",
-        element: <AddAdmin />,
+        element: (
+          <ProtectedRoutes role="admin">
+            <AddAdmin />
+          </ProtectedRoutes>
+        ),
       },
     ],
   },

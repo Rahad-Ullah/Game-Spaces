@@ -14,7 +14,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import Container from "@/components/shared/Container";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { useLoginMutation } from "@/redux/features/auth/authApi";
 import { useAppDispatch } from "@/redux/hook";
@@ -33,6 +33,8 @@ const formValidationSchema = z.object({
 const Login = () => {
   const [login] = useLoginMutation();
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const location = useLocation();
 
   // define form
   const form = useForm<z.infer<typeof formValidationSchema>>({
@@ -59,6 +61,7 @@ const Login = () => {
         toast.success("Login successful", { id: "login" });
         dispatch(saveToAuth(res));
         form.reset();
+        navigate(location.state || "/");
       }
     } catch (error: any) {
       toast.error(error?.data?.message, { id: "login" });

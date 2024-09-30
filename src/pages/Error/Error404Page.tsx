@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import error_img from "../../assets/images/Error_blue.gif";
 import { useNavigate } from "react-router-dom";
 
-const ErrorPage = () => {
+const Error404Page = () => {
   const navigate = useNavigate();
 
   return (
@@ -23,4 +23,4 @@ const ErrorPage = () => {
   );
 };
 
-export default ErrorPage;
+export default Error404Page;

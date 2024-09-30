@@ -55,12 +55,12 @@ const Footer = () => {
     // }
   }
   return (
-    <footer className="pt-20 bg-slate-900 text-white">
+    <footer className="pt-16 lg:pt-24 bg-slate-900 text-white">
       <Container>
         <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-8 text-center md:text-start">
           <div className="flex-1">
             <h1 className="text-3xl font-extrabold">
-              <span className="text-primary">Game</span>Space
+              <span className="text-primary">Game</span> Spaces
             </h1>
             <p className="">To simplify your booking facility.</p>
 
