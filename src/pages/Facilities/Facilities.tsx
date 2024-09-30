@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable react-hooks/exhaustive-deps */
 import Container from "@/components/shared/Container";
 import { useGetAllFacilitiesQuery } from "@/redux/features/facility/facilityApi";
@@ -6,10 +7,16 @@ import FacilityCard from "./FacilitiesUtils/FacilityCard";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Search } from "lucide-react";
+import { ChevronLeft, ChevronRight, Search } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Label } from "@/components/ui/label";
 import { searchFacilities } from "@/utils/searchFacilities";
+import {
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+} from "@/components/ui/pagination";
 
 const Facilities = () => {
   const { data, isFetching } = useGetAllFacilitiesQuery(undefined);
@@ -20,6 +27,9 @@ const Facilities = () => {
   const [search, setSearch] = useState("");
   const [minPrice, setMinPrice] = useState(0);
   const [maxPrice, setMaxPrice] = useState(Infinity);
+  const [page, setPage] = useState(1);
+  const [limit] = useState(12);
+  const [total, setTotal] = useState(facilities?.length);
   const [searchResult, setSearchResult] = useState<TFacility[]>(facilities);
 
   useEffect(() => {
@@ -27,10 +37,15 @@ const Facilities = () => {
       facilities,
       search,
       minPrice,
-      maxPrice || Infinity
+      maxPrice || Infinity,
+      page,
+      limit
     );
-    setSearchResult(result);
-  }, [search, minPrice, maxPrice, isFetching]);
+    setSearchResult(result.facilities);
+    setTotal(result.total);
+  }, [search, minPrice, maxPrice, page, isFetching]);
+
+  const pages = Math.ceil(total / limit);
 
   return (
     <Container>
@@ -108,6 +123,48 @@ const Facilities = () => {
             </h1>
           )}
         </div>
+        {/* pagination */}
+        <section className="flex flex-col md:flex-row justify-center gap-8 items-center py-12">
+          <Pagination className="">
+            <PaginationContent className="flex-wrap">
+              <PaginationItem>
+                <Button
+                  onClick={() => setPage(page - 1)}
+                  className="cursor-pointer"
+                  variant={"ghost"}
+                  disabled={page <= 1}
+                >
+                  <ChevronLeft size={16} /> Previous
+                </Button>
+              </PaginationItem>
+              {Array.from({ length: pages }).map((_: any, index: number) => (
+                <PaginationItem key={index}>
+                  <Button
+                    onClick={() => {
+                      setPage(index + 1);
+                    }}
+                    variant={page === index + 1 ? "default" : "ghost"}
+                  >
+                    {index + 1}
+                  </Button>
+                </PaginationItem>
+              ))}
+              <PaginationItem>
+                <PaginationEllipsis />
+              </PaginationItem>
+              <PaginationItem>
+                <Button
+                  onClick={() => setPage(page + 1)}
+                  className="cursor-pointer"
+                  variant={"ghost"}
+                  disabled={page >= pages}
+                >
+                  Next <ChevronRight size={16} />
+                </Button>
+              </PaginationItem>
+            </PaginationContent>
+          </Pagination>
+        </section>
       </div>
     </Container>
   );
