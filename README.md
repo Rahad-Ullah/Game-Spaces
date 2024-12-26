@@ -71,7 +71,7 @@ Follow the instructions given below to install and run the project locally.
 1. **Clone the Repository:**
 
    ```base
-   git clone https://github.com/Rahad-Ullah/Game-Spaces-client.git
+   git clone https://github.com/Rahad-Ullah/Game-Spaces.git
    ```
 
 2. **Open in a Code Editor:**
