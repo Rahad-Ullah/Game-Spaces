@@ -138,9 +138,9 @@ const Login = () => {
                         />
                       </FormControl>
                       <FormMessage />
-                      <Link to={""} className="hover:underline text-primary">
+                      {/* <Link to={""} className="hover:underline text-primary">
                         <small>Forgot password?</small>
-                      </Link>
+                      </Link> */}
                     </FormItem>
                   )}
                 />

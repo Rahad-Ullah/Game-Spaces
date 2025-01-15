@@ -2,6 +2,7 @@ import banner_img from "@/assets/images/pngimg.com - football_player_PNG9.png";
 import Container from "@/components/shared/Container";
 import { Button } from "@/components/ui/button";
 import { MousePointer } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const BannerSection = () => {
   return (
@@ -23,9 +24,11 @@ const BannerSection = () => {
               fields, find and reserve the perfect space for your next game or
               event today!
             </p>
-            <Button className="md:text-base mt-4 px-6 h-12 gap-2 rounded-full">
-              Book Now <MousePointer className="rotate-12 size-5" />
-            </Button>
+            <Link to={"/facilities"}>
+              <Button className="md:text-base mt-4 px-6 h-12 gap-2 rounded-full">
+                Book Now <MousePointer className="rotate-12 size-5" />
+              </Button>
+            </Link>
           </div>
         </div>
       </Container>

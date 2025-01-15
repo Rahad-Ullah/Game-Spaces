@@ -85,7 +85,7 @@ const ContactUs = () => {
           {/* background image */}
           <div className="">
             <img
-              src="https://c4.wallpaperflare.com/wallpaper/971/967/737/sports-images-for-desktop-background-wallpaper-preview.jpg"
+              src="https://st4.depositphotos.com/1005563/19666/i/450/depositphotos_196666862-stock-photo-assorted-sports-equipment-different-kinds.jpg"
               alt="sport image"
               className="rounded-lg h-full object-cover"
             />

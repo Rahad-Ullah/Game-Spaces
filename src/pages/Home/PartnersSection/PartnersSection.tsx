@@ -2,7 +2,7 @@ import Container from "@/components/shared/Container";
 
 const PartnersSection = () => {
   return (
-    <div className="py-16 lg:py-24">
+    <div className="py-16 lg:py-24 bg-slate-50">
       <Container>
         <div>
           {/* section header */}

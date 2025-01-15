@@ -1,4 +1,5 @@
 import BannerSection from "./BannerSection";
+import BlogsSection from "./BlogsSection/BlogsSection";
 import FeaturedFacilities from "./FeaturedFacilities/FeaturedFacilities";
 import Footer from "./Footer/Footer";
 import HowItWorksSection from "./HowItWorks/HowItWorksSection";
@@ -14,8 +15,11 @@ const Home = () => {
       <FeaturedFacilities />
       {/* How it works */}
       <HowItWorksSection />
+
       {/* Testimonial */}
       <Testimonial />
+      {/* Blogs */}
+      <BlogsSection />
       {/* Our Partners */}
       <PartnersSection />
       {/* Footer section */}

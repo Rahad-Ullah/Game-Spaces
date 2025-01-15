@@ -21,6 +21,10 @@ import Error404Page from "@/pages/Error/Error404Page";
 import UnauthorizedAccess from "@/pages/Error/UnauthorizedAccess";
 import ProtectedRoutes from "./ProtectedRoutes";
 import PrivateRoutes from "./PrivateRoutes";
+import Blogs from "@/pages/Blogs/Blogs";
+import BlogDetails from "@/pages/BlogDetails/BlogDetails";
+import Admins from "@/pages/Dashboard/Admin/Admins/Admins";
+import Users from "@/pages/Dashboard/Admin/Users/Users";
 
 const router = createBrowserRouter([
   {
@@ -71,6 +75,14 @@ const router = createBrowserRouter([
       {
         path: "/about-us",
         element: <AboutUs />,
+      },
+      {
+        path: "/blogs",
+        element: <Blogs />,
+      },
+      {
+        path: "/blogs/:id",
+        element: <BlogDetails />,
       },
       {
         path: "/sign-up",
@@ -127,6 +139,22 @@ const router = createBrowserRouter([
         element: (
           <ProtectedRoutes role="admin">
             <AddFacility />
+          </ProtectedRoutes>
+        ),
+      },
+      {
+        path: "users",
+        element: (
+          <ProtectedRoutes role="admin">
+            <Users />
+          </ProtectedRoutes>
+        ),
+      },
+      {
+        path: "admins",
+        element: (
+          <ProtectedRoutes role="admin">
+            <Admins />
           </ProtectedRoutes>
         ),
       },
