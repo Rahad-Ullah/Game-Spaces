@@ -19,7 +19,7 @@ import {
 } from "@/components/ui/card";
 import { ChartConfig, ChartContainer } from "@/components/ui/chart";
 const chartData = [
-  { browser: "safari", visitors: 16, fill: "var(--color-safari)" },
+  { browser: "safari", visitors: 200, fill: "var(--color-safari)" },
 ];
 
 const chartConfig = {
@@ -32,11 +32,11 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-export function FacilityChart() {
+export function UserChart() {
   return (
     <Card className="flex flex-col">
       <CardHeader className="items-center pb-0">
-        <CardTitle>Active Facilities</CardTitle>
+        <CardTitle>Users</CardTitle>
         <CardDescription>July - December 2024</CardDescription>
       </CardHeader>
       <CardContent className="flex-1 pb-0">
@@ -46,9 +46,10 @@ export function FacilityChart() {
         >
           <RadialBarChart
             data={chartData}
-            endAngle={100}
+            startAngle={0}
+            endAngle={250}
             innerRadius={80}
-            outerRadius={140}
+            outerRadius={110}
           >
             <PolarGrid
               gridType="circle"
@@ -57,7 +58,7 @@ export function FacilityChart() {
               className="first:fill-muted last:fill-background"
               polarRadius={[86, 74]}
             />
-            <RadialBar dataKey="visitors" background />
+            <RadialBar dataKey="visitors" background cornerRadius={10} />
             <PolarRadiusAxis tick={false} tickLine={false} axisLine={false}>
               <Label
                 content={({ viewBox }) => {
@@ -81,7 +82,7 @@ export function FacilityChart() {
                           y={(viewBox.cy || 0) + 24}
                           className="fill-muted-foreground"
                         >
-                          Facilities
+                          Users
                         </tspan>
                       </text>
                     );
@@ -94,10 +95,10 @@ export function FacilityChart() {
       </CardContent>
       <CardFooter className="flex-col gap-2 text-sm">
         <div className="flex items-center gap-2 font-medium leading-none">
-          Trending up by 1.2% this month <TrendingUp className="h-4 w-4" />
+          Trending up by 3.4% this month <TrendingUp className="h-4 w-4" />
         </div>
         <div className="leading-none text-muted-foreground">
-          Showing total facilities for the last 6 months
+          Showing total users for the last 6 months
         </div>
       </CardFooter>
     </Card>
