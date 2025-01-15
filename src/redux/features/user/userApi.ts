@@ -5,12 +5,20 @@ const userApi = baseApi.injectEndpoints({
     getAllUsers: builder.query({
       query: () => {
         return {
+          url: `/users`,
+          method: "GET",
+        };
+      },
+    }),
+    getUsers: builder.query({
+      query: () => {
+        return {
           url: `/users?role=user`,
           method: "GET",
         };
       },
     }),
-    getAllAdmins: builder.query({
+    getAdmins: builder.query({
       query: () => {
         return {
           url: `/users?role=admin`,
@@ -21,4 +29,5 @@ const userApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useGetAllUsersQuery, useGetAllAdminsQuery } = userApi;
+export const { useGetAllUsersQuery, useGetUsersQuery, useGetAdminsQuery } =
+  userApi;

@@ -27,36 +27,36 @@ import {
 import { useState } from "react";
 
 const chartData = [
-  { date: "2025-01-01", booking: 150 },
-  { date: "2025-01-02", booking: 180 },
-  { date: "2025-01-03", booking: 120 },
-  { date: "2025-01-01", booking: 260 },
-  { date: "2025-01-05", booking: 290 },
-  { date: "2025-01-06", booking: 340 },
-  { date: "2025-01-07", booking: 180 },
-  { date: "2025-01-08", booking: 320 },
-  { date: "2025-01-09", booking: 110 },
-  { date: "2025-01-10", booking: 190 },
-  { date: "2025-01-11", booking: 350 },
-  { date: "2025-01-12", booking: 210 },
-  { date: "2025-01-13", booking: 380 },
-  { date: "2025-01-14", booking: 220 },
-  { date: "2025-01-15", booking: 170 },
-  { date: "2025-01-16", booking: 190 },
-  { date: "2025-01-17", booking: 360 },
-  { date: "2025-01-18", booking: 410 },
-  { date: "2025-01-19", booking: 180 },
-  { date: "2025-01-20", booking: 150 },
-  { date: "2025-01-21", booking: 200 },
-  { date: "2025-01-22", booking: 170 },
-  { date: "2025-01-23", booking: 230 },
-  { date: "2025-01-24", booking: 290 },
-  { date: "2025-01-25", booking: 250 },
-  { date: "2025-01-26", booking: 130 },
-  { date: "2025-01-27", booking: 420 },
-  { date: "2025-01-28", booking: 180 },
-  { date: "2025-01-29", booking: 240 },
-  { date: "2025-01-30", booking: 380 },
+  { date: "2025-01-01", booking: 0 },
+  { date: "2025-01-02", booking: 0 },
+  { date: "2025-01-03", booking: 0 },
+  { date: "2025-01-04", booking: 0 },
+  { date: "2025-01-05", booking: 0 },
+  { date: "2025-01-06", booking: 0 },
+  { date: "2025-01-07", booking: 0 },
+  { date: "2025-01-08", booking: 0 },
+  { date: "2025-01-09", booking: 0 },
+  { date: "2025-01-10", booking: 0 },
+  { date: "2025-01-11", booking: 0 },
+  { date: "2025-01-12", booking: 0 },
+  { date: "2025-01-13", booking: 1 },
+  { date: "2025-01-14", booking: 1 },
+  { date: "2025-01-15", booking: 2 },
+  { date: "2025-01-16", booking: 1 },
+  { date: "2025-01-17", booking: 0 },
+  { date: "2025-01-18", booking: 0 },
+  { date: "2025-01-19", booking: 0 },
+  { date: "2025-01-20", booking: 0 },
+  { date: "2025-01-21", booking: 0 },
+  { date: "2025-01-22", booking: 0 },
+  { date: "2025-01-23", booking: 0 },
+  { date: "2025-01-24", booking: 0 },
+  { date: "2025-01-25", booking: 0 },
+  { date: "2025-01-26", booking: 0 },
+  { date: "2025-01-27", booking: 0 },
+  { date: "2025-01-28", booking: 0 },
+  { date: "2025-01-29", booking: 0 },
+  { date: "2025-01-30", booking: 0 },
 ];
 
 const chartConfig = {
@@ -74,7 +74,7 @@ export function BookingChart() {
 
   const filteredData = chartData.filter((item) => {
     const date = new Date(item.date);
-    const referenceDate = new Date("2025-01-30");
+    const referenceDate = new Date("2025-01-16");
     let daysToSubtract = 90;
     if (timeRange === "30d") {
       daysToSubtract = 30;

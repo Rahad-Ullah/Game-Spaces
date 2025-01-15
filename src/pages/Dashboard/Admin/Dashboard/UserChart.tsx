@@ -18,9 +18,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { ChartConfig, ChartContainer } from "@/components/ui/chart";
-const chartData = [
-  { browser: "safari", visitors: 200, fill: "var(--color-safari)" },
-];
+import { useGetAllUsersQuery } from "@/redux/features/user/userApi";
 
 const chartConfig = {
   visitors: {
@@ -33,6 +31,13 @@ const chartConfig = {
 } satisfies ChartConfig;
 
 export function UserChart() {
+  const { data } = useGetAllUsersQuery(undefined);
+  const usersCount = data?.data?.length;
+
+  const chartData = [
+    { browser: "safari", visitors: usersCount, fill: "var(--color-safari)" },
+  ];
+
   return (
     <Card className="flex flex-col">
       <CardHeader className="items-center pb-0">
@@ -75,7 +80,7 @@ export function UserChart() {
                           y={viewBox.cy}
                           className="fill-foreground text-4xl font-bold"
                         >
-                          {chartData[0].visitors.toLocaleString()}
+                          {chartData[0].visitors?.toLocaleString()}
                         </tspan>
                         <tspan
                           x={viewBox.cx}

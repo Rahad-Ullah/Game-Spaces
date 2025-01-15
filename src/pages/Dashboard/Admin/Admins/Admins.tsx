@@ -24,13 +24,13 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Link } from "react-router-dom";
-import { useGetAllAdminsQuery } from "@/redux/features/user/userApi";
 import { TUser } from "@/types/TAuth";
 import { MoreHorizontal } from "lucide-react";
+import { useGetAdminsQuery } from "@/redux/features/user/userApi";
 
 const Admins = () => {
   // get admins data
-  const { data, isFetching } = useGetAllAdminsQuery(undefined);
+  const { data, isFetching } = useGetAdminsQuery(undefined);
   const admins = data?.data;
 
   return (

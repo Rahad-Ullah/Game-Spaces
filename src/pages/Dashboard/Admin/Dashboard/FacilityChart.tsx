@@ -18,13 +18,11 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { ChartConfig, ChartContainer } from "@/components/ui/chart";
-const chartData = [
-  { browser: "safari", visitors: 16, fill: "var(--color-safari)" },
-];
+import { useGetAllFacilitiesQuery } from "@/redux/features/facility/facilityApi";
 
 const chartConfig = {
-  visitors: {
-    label: "Visitors",
+  facilities: {
+    label: "Facilities",
   },
   safari: {
     label: "Safari",
@@ -33,6 +31,17 @@ const chartConfig = {
 } satisfies ChartConfig;
 
 export function FacilityChart() {
+  const { data } = useGetAllFacilitiesQuery(undefined);
+  const facilityCount = data?.data?.length;
+
+  const chartData = [
+    {
+      browser: "safari",
+      facilities: facilityCount,
+      fill: "var(--color-safari)",
+    },
+  ];
+
   return (
     <Card className="flex flex-col">
       <CardHeader className="items-center pb-0">
@@ -57,7 +66,7 @@ export function FacilityChart() {
               className="first:fill-muted last:fill-background"
               polarRadius={[86, 74]}
             />
-            <RadialBar dataKey="visitors" background />
+            <RadialBar dataKey="facilities" background />
             <PolarRadiusAxis tick={false} tickLine={false} axisLine={false}>
               <Label
                 content={({ viewBox }) => {
@@ -74,7 +83,7 @@ export function FacilityChart() {
                           y={viewBox.cy}
                           className="fill-foreground text-4xl font-bold"
                         >
-                          {chartData[0].visitors.toLocaleString()}
+                          {chartData[0].facilities?.toLocaleString()}
                         </tspan>
                         <tspan
                           x={viewBox.cx}

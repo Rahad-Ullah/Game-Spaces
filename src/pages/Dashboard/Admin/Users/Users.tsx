@@ -24,13 +24,13 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Link } from "react-router-dom";
-import { useGetAllUsersQuery } from "@/redux/features/user/userApi";
 import { TUser } from "@/types/TAuth";
 import { MoreHorizontal } from "lucide-react";
+import { useGetUsersQuery } from "@/redux/features/user/userApi";
 
 const Users = () => {
   // get users data
-  const { data, isFetching } = useGetAllUsersQuery(undefined);
+  const { data, isFetching } = useGetUsersQuery(undefined);
   const users = data?.data;
 
   return (
