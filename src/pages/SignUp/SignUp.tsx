@@ -32,8 +32,8 @@ const formValidationSchema = z.object({
   email: z.string().email().min(1, {
     message: "Email must be a valid email address.",
   }),
-  password: z.string().min(8, {
-    message: "Password must be at least 8 character",
+  password: z.string().min(6, {
+    message: "Password must be at least 6 character",
   }),
 });
 
