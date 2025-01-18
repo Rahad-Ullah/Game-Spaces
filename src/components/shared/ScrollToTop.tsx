@@ -1,10 +1,21 @@
 import { useEffect, useState } from "react";
 import { Button } from "../ui/button";
 import { ArrowUp } from "lucide-react";
+import { useLocation } from "react-router-dom";
 
 const ScrollToTop = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const { pathname } = useLocation(); // Get the current route path
 
+  // instant scrolling for route changes
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "instant",
+    });
+  }, [pathname]);
+
+  // show scroll to top button when scrolled 300 px
   const handleScroll = () => {
     if (window.scrollY > 300) {
       setIsVisible(true);
@@ -13,6 +24,7 @@ const ScrollToTop = () => {
     }
   };
 
+  // handle scroll to top button
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
