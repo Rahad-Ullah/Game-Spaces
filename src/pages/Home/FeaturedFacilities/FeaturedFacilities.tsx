@@ -5,7 +5,7 @@ import FacilityCard from "./FacilityCard";
 
 const FeaturedFacilities = () => {
   const { data } = useGetAllFacilitiesQuery(undefined);
-  const facilities = data?.data?.slice(11, 14);
+  const facilities = data?.data?.slice(11, 15);
 
   return (
     <div className="py-16 lg:py-24 bg-slate-50">
@@ -19,7 +19,7 @@ const FeaturedFacilities = () => {
             Elevate your game in our cutting-edge facilities.
           </p>
           {/* facilities container */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 pt-12">
             {facilities?.map((item: TFacility) => (
               <FacilityCard key={item?._id} facility={item} />
             ))}

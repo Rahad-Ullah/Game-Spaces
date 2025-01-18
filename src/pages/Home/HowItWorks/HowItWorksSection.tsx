@@ -48,7 +48,7 @@ const HowItWorksSection = () => {
                 <Link to={"/sign-up"} className="w-full">
                   <Button
                     variant={"outline"}
-                    className="w-full text-base gap-2 h-12 border-primary text-primary group-hover:text-white group-hover:bg-primary transition duration-500"
+                    className="w-full text-base gap-2 h-10 border-primary text-primary group-hover:text-white group-hover:bg-primary transition duration-500"
                   >
                     Register Now <ArrowRight size={16} />
                   </Button>
@@ -74,7 +74,7 @@ const HowItWorksSection = () => {
                 <Link to={"/facilities"} className="w-full">
                   <Button
                     variant={"outline"}
-                    className="w-full text-base gap-2 h-12 border-primary text-primary group-hover:text-white group-hover:bg-primary transition duration-500"
+                    className="w-full text-base gap-2 h-10 border-primary text-primary group-hover:text-white group-hover:bg-primary transition duration-500"
                   >
                     Go To Facilities <ArrowRight size={16} />
                   </Button>
@@ -100,7 +100,7 @@ const HowItWorksSection = () => {
                 <Link to={"/facilities"} className="w-full">
                   <Button
                     variant={"outline"}
-                    className="w-full text-base gap-2 h-12 border-primary text-primary group-hover:text-white group-hover:bg-primary transition duration-500"
+                    className="w-full text-base gap-2 h-10 border-primary text-primary group-hover:text-white group-hover:bg-primary transition duration-500"
                   >
                     Book Now <ArrowRight size={16} />
                   </Button>

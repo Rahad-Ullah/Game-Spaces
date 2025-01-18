@@ -54,7 +54,7 @@ const BlogsSection = () => {
                 </div>
               )}
               {blogs?.length > 0 && (
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 2xl:grid-cols-4 gap-6">
                   {blogs?.map((item, index) => (
                     <BlogCard key={index} blog={item} />
                   ))}

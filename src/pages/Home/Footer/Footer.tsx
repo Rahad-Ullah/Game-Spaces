@@ -124,27 +124,27 @@ const Footer = () => {
               </Link>
             </li>
             <li>
-              <Link to={"/products"}>
+              <Link to={"/facilities"}>
                 <Button
                   variant={"ghost"}
                   className="hover:bg-primary hover:text-white"
                 >
-                  Products
+                  Facilities
                 </Button>
               </Link>
             </li>
             <li>
-              <Link to={"/management"}>
+              <Link to={"/blogs"}>
                 <Button
                   variant={"ghost"}
                   className="hover:bg-primary hover:text-white"
                 >
-                  Management
+                  Blogs
                 </Button>
               </Link>
             </li>
             <li>
-              <Link to={""}>
+              <Link to={"/about-us"}>
                 <Button
                   variant={"ghost"}
                   className="hover:bg-primary hover:text-white"
@@ -158,7 +158,7 @@ const Footer = () => {
           <ul className="space-y-1 text-neutral-300">
             <li className="font-bold text-xl text-white py-1 mb-5">Support</li>
             <li>
-              <Link to={"/"}>
+              <Link to={"/contact"}>
                 <Button
                   variant={"ghost"}
                   className="hover:bg-primary hover:text-white"
