@@ -1,5 +1,4 @@
 import Container from "@/components/shared/Container";
-import PoiMarkers from "@/components/shared/PoiMarkers";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -12,11 +11,12 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { zodResolver } from "@hookform/resolvers/zod";
-import {
-  APIProvider,
-  Map,
-  MapCameraChangedEvent,
-} from "@vis.gl/react-google-maps";
+// import PoiMarkers from "@/components/shared/PoiMarkers";
+// import {
+//   APIProvider,
+//   Map,
+//   MapCameraChangedEvent,
+// } from "@vis.gl/react-google-maps";
 import { Building2, Mail, Phone } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -38,10 +38,10 @@ const formValidationSchema = z.object({
 });
 
 // office location for google maps
-type Poi = { key: string; location: google.maps.LatLngLiteral };
-const locations: Poi[] = [
-  { key: "operaHouse", location: { lat: 40.712776, lng: -74.005974 } },
-];
+// type Poi = { key: string; location: google.maps.LatLngLiteral };
+// const locations: Poi[] = [
+//   { key: "operaHouse", location: { lat: 40.712776, lng: -74.005974 } },
+// ];
 
 const ContactUs = () => {
   // define form
@@ -225,7 +225,7 @@ const ContactUs = () => {
           </div>
         </div>
         {/* map section */}
-        <div className="grid md:grid-cols-2 gap-y-10 lg:gap-20 py-12">
+        {/* <div className="grid md:grid-cols-2 gap-y-10 lg:gap-20 py-12">
           <div className="flex flex-col justify-center">
             <div className="space-y-4">
               <span className="text-sm font-semibold border rounded-full px-3 py-1">
@@ -264,7 +264,7 @@ const ContactUs = () => {
               </Map>
             </APIProvider>
           </div>
-        </div>
+        </div> */}
       </Container>
     </div>
   );
